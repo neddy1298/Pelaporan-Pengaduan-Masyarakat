@@ -16,6 +16,7 @@ class CreatePetugasTable extends Migration
         Schema::create('petugas', function (Blueprint $table) {
             $table->increments('id_petugas');
             $table->string('nama_petugas', 35);
+            $table->string('email')->unique();
             $table->string('username', 25);
             $table->string('password', 60);
             $table->string('telp', 13);
