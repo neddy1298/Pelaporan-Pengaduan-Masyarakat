@@ -20,6 +20,7 @@ class CreateMasyarakatsTable extends Migration
             $table->string('username', 25);
             $table->string('password', 60);
             $table->string('telp', 13);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
