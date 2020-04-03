@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PetugasController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:petugas');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        //
+        return view('petugas.home');
     }
 
     /**

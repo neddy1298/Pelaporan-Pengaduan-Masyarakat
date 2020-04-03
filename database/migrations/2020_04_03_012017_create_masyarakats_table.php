@@ -14,7 +14,8 @@ class CreateMasyarakatsTable extends Migration
     public function up()
     {
         Schema::create('masyarakats', function (Blueprint $table) {
-            $table->char('nik', 16)->primary();
+            $table->id();
+            $table->char('nik', 16)->unique();
             $table->string('nama', 35);
             $table->string('email')->unique();
             $table->string('username', 25);

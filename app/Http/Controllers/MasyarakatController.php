@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class MasyarakatController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:masyarakat');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class MasyarakatController extends Controller
      */
     public function index()
     {
-        //
+        return view('masyarakat.home');
     }
 
     /**

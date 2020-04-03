@@ -29,7 +29,8 @@ class PetugasSeeder extends Seeder
             'level' => 'petugas',
         ];
 
-        DB::table('petugas')->insert($admin, $petugas);
+        DB::table('petugas')->insert($admin);
+        DB::table('petugas')->insert($petugas);
 
 
         factory(\App\Models\Petugas::class, 10)->create();
