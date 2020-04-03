@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\MasyarakatResetPasswordNotification;
 
 class Masyarakat extends Authenticatable
 {
+    use Notifiable;
+
     protected $guard = 'masyarakat';
 
     /**
@@ -24,4 +28,9 @@ class Masyarakat extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-   }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MasyarakatResetPasswordNotification($token));
+    }
+}
