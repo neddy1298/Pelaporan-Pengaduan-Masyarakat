@@ -11,7 +11,7 @@ class PetugasLoginController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('guest:petugas', ['except' => ['logout']]);
+      $this->middleware('guest:petugas', ['except' => ['logoutPetugas']]);
     }
 
     public function showLoginForm()
@@ -41,7 +41,7 @@ class PetugasLoginController extends Controller
       return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
-    public function logout()
+    public function logoutPetugas()
     {
         Auth::guard('petugas')->logout();
         return redirect('/petugas');

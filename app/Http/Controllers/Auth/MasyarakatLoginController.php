@@ -11,7 +11,7 @@ class MasyarakatLoginController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('guest:masyarakat', ['except' => ['logout']]);
+      $this->middleware('guest:masyarakat', ['except' => ['logoutMasyarakat']]);
     }
 
     public function showLoginForm()
@@ -41,7 +41,7 @@ class MasyarakatLoginController extends Controller
       return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
-    public function logout()
+    public function logoutMasyarakat()
     {
         Auth::guard('masyarakat')->logout();
         return redirect('/masyarakat');
