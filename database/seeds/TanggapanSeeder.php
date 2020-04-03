@@ -11,6 +11,6 @@ class TanggapanSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(\App\Models\Tanggapan::class, 25)->create();
     }
 }

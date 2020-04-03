@@ -14,8 +14,15 @@ class CreatePengaduansTable extends Migration
     public function up()
     {
         Schema::create('pengaduans', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_pengaduan');
+            $table->date('tgl_pengaduan');
+            $table->char('nik', 16);
+            $table->text('isi_laporan');
+            $table->string('foto');
+            $table->enum('status', ['0','proses','selesai']);
             $table->timestamps();
+
+            $table->foreign('nik')->references('nik')->on('masyarakats')->onDelete('cascade');
         });
     }
 

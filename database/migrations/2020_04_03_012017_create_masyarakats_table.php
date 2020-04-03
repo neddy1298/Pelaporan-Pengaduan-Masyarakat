@@ -14,7 +14,13 @@ class CreateMasyarakatsTable extends Migration
     public function up()
     {
         Schema::create('masyarakats', function (Blueprint $table) {
-            $table->id();
+            $table->char('nik', 16)->primary();
+            $table->string('nama', 35);
+            $table->string('email')->unique();
+            $table->string('username', 25);
+            $table->string('password');
+            $table->string('telp', 13);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

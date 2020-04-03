@@ -14,8 +14,15 @@ class CreateTanggapansTable extends Migration
     public function up()
     {
         Schema::create('tanggapans', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_tanggapan');
+            $table->integer('id_pengaduan')->unsigned();
+            $table->date('tgl_tanggapan');
+            $table->text('tanggapan');
+            $table->integer('id_petugas')->unsigned();
             $table->timestamps();
+
+            $table->foreign('id_pengaduan')->references('id_pengaduan')->on('pengaduans')->onDelete('cascade');
+            $table->foreign('id_petugas')->references('id_petugas')->on('petugas')->onDelete('cascade');
         });
     }
 
