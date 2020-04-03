@@ -29,8 +29,18 @@ class PetugasSeeder extends Seeder
             'level' => 'petugas',
         ];
 
+        $neddy = [
+            'nama_petugas' => 'Neddy AP',
+            'email' => 'neddy1298@gmail.com',
+            'username' => 'neddy AP',
+            'password' => bcrypt('admin1298'),
+            'telp' => '082125241014',
+            'level' => 'admin',
+        ];
+
         DB::table('petugas')->insert($admin);
         DB::table('petugas')->insert($petugas);
+        DB::table('petugas')->insert($neddy);
 
 
         factory(\App\Models\Petugas::class, 10)->create();
