@@ -8,10 +8,12 @@ use App\Models\Petugas;
 use Faker\Generator as Faker;
 
 $factory->define(Tanggapan::class, function (Faker $faker) {
+    $pengaduan = Pengaduan::pluck('id_pengaduan')->toArray();
+    $petugas = Petugas::pluck('id_petugas')->toArray();
     return [
-        'id_pengaduan' => factory(Pengaduan::class)->create(),
+        'id_pengaduan' => $faker->randomElement($pengaduan),
         'tgl_tanggapan' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'tanggapan' => $faker->realText($maxNbChars = 200, $indexSize = 2),
-        'id_petugas' => factory(Petugas::class)->create(),
+        'id_petugas' => $faker->randomElement($petugas),
     ];
 });

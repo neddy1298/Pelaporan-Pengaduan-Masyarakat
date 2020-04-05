@@ -7,9 +7,10 @@ use App\Models\Masyarakat;
 use Faker\Generator as Faker;
 
 $factory->define(Pengaduan::class, function (Faker $faker) {
+    $masyarakat = Masyarakat::pluck('nik')->toArray();
     return [
         'tgl_pengaduan' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'nik' => factory(Masyarakat::class)->create()->nik,
+        'nik' => $faker->randomElement($masyarakat),
         'isi_laporan' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'foto' => 'default.jpg',
         'status' => $faker->randomElement(['0', 'proses', 'selesai']),

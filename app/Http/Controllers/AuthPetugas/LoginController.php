@@ -44,6 +44,6 @@ class LoginController extends Controller
     public function logoutPetugas()
     {
         Auth::guard('petugas')->logout();
-        return redirect('/petugas');
+        return redirect('/admin');
     }
 }

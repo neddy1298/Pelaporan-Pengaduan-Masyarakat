@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\AuthMasyarakat;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -29,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::MASYARAKAT;
+    protected $redirectTo = '/login';
 
     public function __construct()
     {

@@ -17,20 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::prefix('petugas')->group(function() {
-    Route::get('/', 'PetugasController@index')->name('petugas.dashboard');
-    Route::get('/login','AuthPetugas\LoginController@showLoginForm')->name('petugas.login');
-    Route::post('/login', 'AuthPetugas\LoginController@login')->name('petugas.login.submit');
-    Route::get('logout/', 'AuthPetugas\LoginController@logoutPetugas')->name('petugas.logout');
-    Route::get('/password/reset', 'AuthPetugas\ForgotPasswordController@showLinkRequestForm')->name('petugas.password.request');
-    Route::post('/password/email', 'AuthPetugas\ForgotPasswordController@sendResetLinkEmail')->name('petugas.password.email');
-    Route::get('/password/reset/{token}', 'AuthPetugas\ResetPasswordController@showResetForm')->name('petugas.password.reset');
-    Route::post('/password/reset', 'AuthPetugas\ResetPasswordController@reset');
-   }) ;
 
 Route::prefix('masyarakat')->group(function() {
     Route::get('/', 'MasyarakatController@index')->name('masyarakat.dashboard');
@@ -41,4 +27,20 @@ Route::prefix('masyarakat')->group(function() {
     Route::post('/password/email', 'AuthMasyarakat\ForgotPasswordController@sendResetLinkEmail')->name('masyarakat.password.email');
     Route::get('/password/reset/{token}', 'AuthMasyarakat\ResetPasswordController@showResetForm')->name('masyarakat.password.reset');
     Route::post('/password/reset', 'AuthMasyarakat\ResetPasswordController@reset');
-   }) ;
+}) ;
+
+Route::prefix('admin')->group(function() {
+    Route::get('/', 'PetugasController@index')->name('petugas.dashboard');
+    Route::get('/login','AuthPetugas\LoginController@showLoginForm')->name('petugas.login');
+    Route::post('/login', 'AuthPetugas\LoginController@login')->name('petugas.login.submit');
+    Route::get('logout/', 'AuthPetugas\LoginController@logoutPetugas')->name('petugas.logout');
+    Route::get('/password/reset', 'AuthPetugas\ForgotPasswordController@showLinkRequestForm')->name('petugas.password.request');
+    Route::post('/password/email', 'AuthPetugas\ForgotPasswordController@sendResetLinkEmail')->name('petugas.password.email');
+    Route::get('/password/reset/{token}', 'AuthPetugas\ResetPasswordController@showResetForm')->name('petugas.password.reset');
+    Route::post('/password/reset', 'AuthPetugas\ResetPasswordController@reset');
+
+    // Admin Pengaduan
+    // Route::group(['prefix' => 'pengaduan'], function () {
+    //     Route::get('/', 'PengaduanController@index')->name('petugas.pengaduan');
+    // });
+}) ;

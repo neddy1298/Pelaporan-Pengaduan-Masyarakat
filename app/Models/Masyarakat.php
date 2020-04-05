@@ -29,6 +29,11 @@ class Masyarakat extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function pengaduan()
+    {
+        return $this->hasMany('App\Models\Pengaduan');
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new MasyarakatResetPasswordNotification($token));

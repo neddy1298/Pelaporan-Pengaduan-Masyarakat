@@ -11,5 +11,5 @@ class PengaduanSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Pengaduan::class, 70)->create();    }
+        factory(\App\Models\Pengaduan::class, 170)->create();    }
 }

@@ -10,4 +10,9 @@ class Tanggapan extends Model
     protected $fillable = [
         'id_pengaduan', 'tgl_tanggapan', 'tanggapan', 'id_petugas',
     ];
+
+    public function petugas()
+    {
+        return $this->hasManyThrough('App\Models\Petugas', App\Models\Tanggapan);
+    }
 }

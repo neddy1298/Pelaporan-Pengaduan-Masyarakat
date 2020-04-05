@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -22,8 +23,6 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
-    public const PETUGAS = '/petugas';
-    public const MASYARAKAT = '/masyarakat';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -32,7 +31,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        config(['app.locale' => 'id']);
+        Carbon::setLocale('id');
 
         parent::boot();
     }
