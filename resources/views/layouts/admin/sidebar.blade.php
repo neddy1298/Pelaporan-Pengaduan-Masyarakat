@@ -20,9 +20,12 @@
                     <span>Pengaduan</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('petugas.pengaduan') }}">Semua Pengaduan</a></li>
-                    <li><a class="nav-link" href="">Belum Verifikasi</a></li>
-                    <li><a class="nav-link" href="layout-transparent.html">Dalam Proses</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Pengaduan Selesai</a></li>
+                    <li><a class="nav-link" href="{{ route('petugas.pengaduan.custome', '0') }}">Belum Verifikasi</a>
+                    </li>
+                    <li><a class="nav-link" href="{{ route('petugas.pengaduan.custome', 'proses') }}">Dalam Proses</a>
+                    </li>
+                    <li><a class="nav-link" href="{{ route('petugas.pengaduan.custome', 'selesai') }}">Pengaduan
+                            Selesai</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -30,9 +33,11 @@
                         class="ion ion-ios-download-outline"></i>
                     <span>Tanggapan</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-top-navigation.html">Semua Tanggapan</a></li>
-                    <li><a class="nav-link" href="">Proses Penanggapan</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Selesai Ditanggapi</a></li>
+                    <li><a class="nav-link" href="{{ route('petugas.tanggapan') }}">Semua Tanggapan</a></li>
+                    <li><a class="nav-link" href="{{ route('petugas.tanggapan.custome', 'proses') }}">Proses
+                            Penanggapan</a></li>
+                    <li><a class="nav-link" href="{{ route('petugas.tanggapan.custome', 'selesai') }}">Selesai
+                            Ditanggapi</a></li>
                 </ul>
             </li>
             <li class="menu-header">Users</li>

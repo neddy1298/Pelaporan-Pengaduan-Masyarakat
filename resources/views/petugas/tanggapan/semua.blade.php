@@ -5,27 +5,30 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Pengaduan</h1>
+            <h1>Tanggapan</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('petugas.dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item">Pengaduan</div>
+                <div class="breadcrumb-item">Tanggapan</div>
             </div>
         </div>
 
         <div class="section-body">
-            <h2 class="section-title">Semua laporan users</h2>
+            <h2 class="section-title">Semua tanggapan</h2>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Laporan Pengaduan</h4>
+                            <h4>Laporan Tanggapan</h4>
                             <div class="card-header-form">
-                                <form action="{{ route('petugas.pengaduan.search') }}" method="GET">
+                                <form action="{{ route('petugas.tanggapan.cari') }}" method="GET">
+                                    @csrf
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" name="test">
+
+                                        <input type="text" class="form-control" placeholder="Search" name="search">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                            <input type="submit" class="btn btn-primary" value="Search">
                                         </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -34,40 +37,36 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
-                                        <th>NIK</th>
-                                        <th>Nama</th>
-                                        <th>Foto</th>
-                                        <th>Isi Laporan</th>
+                                        <th>Nama Petugas</th>
+                                        <th>Tanggapan</th>
                                         <th>Status</th>
                                         <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
 
-                                    @foreach ($pengaduans as $pengaduan)
+                                    @foreach ($tanggapans as $tanggapan)
                                     <tr>
-                                        <td><a href="#">{{ $pengaduan->nik }}</a></td>
-                                        <td class="font-weight-600">{{ $pengaduan->nama }}</td>
-                                        <td>Foto</td>
+                                        <td class="font-weight-600">{{ $tanggapan->nama_petugas }}</td>
                                         <td>
-                                            {!! substr($pengaduan->isi_laporan, 0,30) !!}...
+                                            {!! substr($tanggapan->tanggapan, 0,100) !!}...
                                         </td>
                                         <td>
-                                            @if ($pengaduan->status == '0')
+                                            @if ($tanggapan->status == '0')
                                             <div class="badge badge-danger">Belum di Verifikasi</div>
-                                            @elseif ($pengaduan->status == 'proses')
+                                            @elseif ($tanggapan->status == 'proses')
                                             <div class="badge badge-warning">Dalam Proses</div>
                                             @else
                                             <div class="badge badge-success">Selesai</div>
                                             @endif
                                         </td>
-                                        <td>{{ Carbon\Carbon::parse($pengaduan->tgl_pengaduan)->format('d M Y') }}</td>
-                                        <td><a href="{{ route('petugas.pengaduan.detail', $pengaduan->id_pengaduan) }}"
+                                        <td>{{ Carbon\Carbon::parse($tanggapan->tgl_tanggapan)->format('d M Y') }}</td>
+                                        <td><a href="{{ route('petugas.tanggapan.detail', $tanggapan->id_tanggapan) }}"
                                                 class="btn btn-primary">Detail</a></td>
                                     </tr>
                                     @endforeach
                                 </table>
                             </div>
-                            {{ $pengaduans->onEachSide(1)->links("layouts.admin.paginate") }}
+                            {{ $tanggapans->onEachSide(1)->links("layouts.admin.paginate") }}
                         </div>
                     </div>
                 </div>

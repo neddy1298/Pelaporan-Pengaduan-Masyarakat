@@ -24,6 +24,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('template') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('template') }}/css/components.css">
+
 </head>
 
 <body>
@@ -74,6 +75,7 @@
     <script src="{{ asset('template') }}/js/page/index.js"></script>
     <script src="{{ asset('template') }}/js/page/modules-sweetalert.js"></script>
 
+    @include('sweetalert::alert')
 </body>
 
 </html>

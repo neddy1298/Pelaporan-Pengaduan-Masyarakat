@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Petugas;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
-use DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengaduanController extends Controller
 {
@@ -27,6 +27,31 @@ class PengaduanController extends Controller
         return view('petugas.pengaduan.semua', compact('pengaduans'));
     }
 
+    public function index2($custome)
+    {
+        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
+        ->select('pengaduans.*','masyarakats.nama')->latest('tgl_pengaduan')
+        ->where('pengaduans.status', $custome)->paginate(8);
+        return view('petugas.pengaduan.custome', compact('pengaduans'));
+    }
+
+    public function search(Request $request)
+    {
+        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
+        ->select('pengaduans.*','masyarakats.nama');
+
+		$search = $request->search;
+
+        $pengaduan = $pengaduans
+        ->where('pengaduans.nik','like',"%".$search."%")
+        ->orWhere('pengaduans.nama','like',"%".$search."%")
+        ->orWhere('pengaduans.isi_laporan','like',"%".$search."%")
+        ->paginate(8);
+
+        return $pengaduan;
+        return view('petugas.pengaduan.semua', compact('pengaduans'));
+    }
+
     public function detail($id)
     {
         $pengaduan = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
@@ -45,6 +70,7 @@ class PengaduanController extends Controller
     {
         $pengaduan = Pengaduan::where('pengaduans.id_pengaduan', $id);
         $pengaduan->update(['status'=> $request->status]);
+        Alert::success('Success!', 'Berhasil merubah status');
         return redirect()->back()->with('sukses');
     }
 

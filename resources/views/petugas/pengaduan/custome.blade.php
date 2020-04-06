@@ -20,9 +20,9 @@
                         <div class="card-header">
                             <h4>Laporan Pengaduan</h4>
                             <div class="card-header-form">
-                                <form action="{{ route('petugas.pengaduan.search') }}" method="GET">
+                                <form>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" name="test">
+                                        <input type="text" class="form-control" placeholder="Search">
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                         </div>

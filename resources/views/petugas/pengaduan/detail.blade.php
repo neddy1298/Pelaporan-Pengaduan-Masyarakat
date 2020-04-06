@@ -3,7 +3,6 @@
 
 <!-- Main Content -->
 <div class="main-content">
-    <button class="btn btn-primary" id="swal-2">Launch</button>
     <section class="section">
         <div class="section-header">
             <h1>Pengaduan</h1>
@@ -32,14 +31,17 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h4 class="text-right">{{ $pengaduan->tgl_pengaduan->format('d F, Y') }}</h4>
+
                             @if ($pengaduan->status == '0')
-                            <h4 class="badge badge-danger">Belum di Tanggapi</h4>
+                            <h4 class="badge badge-danger">Belum di Konfirmasi</h4>
                             @elseif ($pengaduan->status == 'proses')
                             <h4 class="badge badge-warning">Proses Penanggapan</h4>
                             @elseif ($pengaduan->status == 'selesai')
                             <h4 class="badge badge-success">Selesai di Tanggapi</h4>
                             @endif
+                            <div class="card-header-form">
+                                <h5 class="text-right">{{ $pengaduan->tgl_pengaduan->format('d F, Y') }}</h5>
+                            </div>
 
 
                             <div class="media">
@@ -60,8 +62,9 @@
 
 
                                             <h6 class="text-right">{{ $tanggapan->tgl_tanggapan->format('d F, Y') }}
-                                                <h6 class="mt-0">{{ $tanggapan->nama_petugas }}</h6>
                                             </h6>
+                                            <h6 class="mt-0">{{ $tanggapan->nama_petugas }}</h6>
+
                                             <p class="mb-0">{{ $tanggapan->tanggapan }}</p>
                                             <hr>
                                             @endforeach

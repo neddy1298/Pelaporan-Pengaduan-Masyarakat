@@ -42,11 +42,18 @@ Route::prefix('admin')->group(function() {
     // Admin Pengaduan
     Route::group(['prefix' => 'pengaduan'], function () {
         Route::get('/', 'Petugas\PengaduanController@index')->name('petugas.pengaduan');
+        Route::get('/show/{custome}', 'Petugas\PengaduanController@index2')->name('petugas.pengaduan.custome');
         Route::get('/{id}', 'Petugas\PengaduanController@detail')->name('petugas.pengaduan.detail');
         Route::post('/{id}/update', 'Petugas\PengaduanController@update')->name('petugas.pengaduan.update');
+        Route::get('/search', 'Petugas\PengaduanController@search')->name('petugas.pengaduan.search');
     });
 
+    // Admin Tanggapan
     Route::group(['prefix' => 'tanggapan'], function () {
+        Route::get('/', 'Petugas\TanggapanController@index')->name('petugas.tanggapan');
+        Route::get('/show/{custome}', 'Petugas\TanggapanController@index2')->name('petugas.tanggapan.custome');
+        Route::get('/{id}', 'Petugas\TanggapanController@detail')->name('petugas.tanggapan.detail');
         Route::post('/create', 'Petugas\TanggapanController@store')->name('petugas.tanggapan.create');
+        Route::get('/search', 'Petugas\TanggapanController@search')->name('petugas.tanggapan.search');
     });
 }) ;
