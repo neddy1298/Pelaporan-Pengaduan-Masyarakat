@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Petugas;
 
 use App\Models\Masyarakat;
 use Illuminate\Http\Request;

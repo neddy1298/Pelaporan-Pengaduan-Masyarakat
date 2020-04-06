@@ -30,7 +30,7 @@ Route::prefix('masyarakat')->group(function() {
 }) ;
 
 Route::prefix('admin')->group(function() {
-    Route::get('/', 'PetugasController@index')->name('petugas.dashboard');
+    Route::get('/', 'Petugas\HomeController@index')->name('petugas.dashboard');
     Route::get('/login','AuthPetugas\LoginController@showLoginForm')->name('petugas.login');
     Route::post('/login', 'AuthPetugas\LoginController@login')->name('petugas.login.submit');
     Route::get('logout/', 'AuthPetugas\LoginController@logoutPetugas')->name('petugas.logout');
@@ -40,7 +40,13 @@ Route::prefix('admin')->group(function() {
     Route::post('/password/reset', 'AuthPetugas\ResetPasswordController@reset');
 
     // Admin Pengaduan
-    // Route::group(['prefix' => 'pengaduan'], function () {
-    //     Route::get('/', 'PengaduanController@index')->name('petugas.pengaduan');
-    // });
+    Route::group(['prefix' => 'pengaduan'], function () {
+        Route::get('/', 'Petugas\PengaduanController@index')->name('petugas.pengaduan');
+        Route::get('/{id}', 'Petugas\PengaduanController@detail')->name('petugas.pengaduan.detail');
+        Route::post('/{id}/update', 'Petugas\PengaduanController@update')->name('petugas.pengaduan.update');
+    });
+
+    Route::group(['prefix' => 'tanggapan'], function () {
+        Route::post('/create', 'Petugas\TanggapanController@store')->name('petugas.tanggapan.create');
+    });
 }) ;

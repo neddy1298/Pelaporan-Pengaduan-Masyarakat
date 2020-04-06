@@ -169,6 +169,8 @@
                 </div>
             </div>
             {{-- End Belum Verifikasi & Proses --}}
+
+            {{-- Pengaduan Terbaru --}}
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
@@ -198,10 +200,13 @@
                     </div>
                 </div>
             </div>
+            {{-- End Pengaduan Terbaru --}}
+
+            {{-- Pengaduan Selesai di Tanggapai --}}
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Laporan Pengaduan Selesai di Tanggapai</h4>
+                        <h4>Pengaduan Selesai di Tanggapai</h4>
                         <div class="card-header-action">
                             <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
                         </div>
@@ -238,6 +243,9 @@
                     </div>
                 </div>
             </div>
+            {{-- End Pengaduan Selesai di Tanggapai --}}
+
+            {{-- Pengaduan Dalam Proses --}}
             <div class="col-md-4">
                 <div class="card card-hero">
                     <div class="hero text-white hero-bg-image hero-bg-parallax"
@@ -268,6 +276,8 @@
                     </div>
                 </div>
             </div>
+            {{-- End Pengaduan Dalam Proses --}}
+
         </div>
     </section>
 </div>

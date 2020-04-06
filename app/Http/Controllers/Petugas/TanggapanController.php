@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Petugas;
 
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
@@ -35,7 +35,15 @@ class TanggapanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Tanggapan::create([
+            'id_pengaduan' => $request->id_pengaduan,
+            'tgl_tanggapan' => $request->tgl_tanggapan,
+            'tanggapan' => $request->tanggapan,
+            'id_petugas' => $request->id_petugas,
+        ]);
+
+        return redirect()->back()->with('sukses');
     }
 
     /**

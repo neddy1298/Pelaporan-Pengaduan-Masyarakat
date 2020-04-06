@@ -19,6 +19,7 @@
     <link rel="stylesheet"
         href="{{ asset('template') }}/node_modules/owl.carousel/dist/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('template') }}/node_modules/ionicons201/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('template') }}/node_modules/chocolat/dist/css/chocolat.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('template') }}/css/style.css">
@@ -39,6 +40,12 @@
     </div>
 
     <!-- General JS Scripts -->
+
+    <script>
+        jQuery(function(){
+           jQuery('#swal-2').click();
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -57,6 +64,7 @@
     <script src="{{ asset('template') }}/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
     <script src="{{ asset('template') }}/node_modules/summernote/dist/summernote-bs4.js"></script>
     <script src="{{ asset('template') }}/node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+    <script src="{{ asset('template') }}/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('template') }}/js/scripts.js"></script>
@@ -64,6 +72,8 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('template') }}/js/page/index.js"></script>
+    <script src="{{ asset('template') }}/js/page/modules-sweetalert.js"></script>
+
 </body>
 
 </html>

@@ -9,8 +9,9 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
             <li class="active">
-                <a href="{{ route('petugas.dashboard') }}" class="nav-link "><i
-                        class="fas fa-fire"></i><span>Dashboard</span></a>
+                <a href="{{ route('petugas.dashboard') }}" class="nav-link ">
+                    <i class="fas fa-fire"></i>
+                    <span>Dashboard</span></a>
             </li>
             <li class="menu-header">Laporan</li>
             <li class="nav-item dropdown">
@@ -18,7 +19,7 @@
                         class="ion ion-ios-download-outline"></i>
                     <span>Pengaduan</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-top-navigation.html">Semua Pengaduan</a></li>
+                    <li><a class="nav-link" href="{{ route('petugas.pengaduan') }}">Semua Pengaduan</a></li>
                     <li><a class="nav-link" href="">Belum Verifikasi</a></li>
                     <li><a class="nav-link" href="layout-transparent.html">Dalam Proses</a></li>
                     <li><a class="nav-link" href="layout-top-navigation.html">Pengaduan Selesai</a></li>

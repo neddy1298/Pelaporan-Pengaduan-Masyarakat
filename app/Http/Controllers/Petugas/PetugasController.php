@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Petugas;
 
 use App\Models\Petugas;
 use App\Models\Masyarakat;
@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class PetugasController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth:petugas');
-    }
 
     /**
      * Display a listing of the resource.

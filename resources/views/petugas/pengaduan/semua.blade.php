@@ -5,78 +5,73 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Hero</h1>
+            <h1>Pengaduan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Hero</div>
+                <div class="breadcrumb-item active"><a href="{{ route('petugas.dashboard') }}">Dashboard</a></div>
+                <div class="breadcrumb-item">Pengaduan</div>
             </div>
         </div>
 
         <div class="section-body">
-            <h2 class="section-title">Hero</h2>
-            <p class="section-lead">Components that can be used to make something bigger than the header.</p>
-
+            <h2 class="section-title">Semua laporan users</h2>
             <div class="row">
-                <div class="col-12 mb-4">
-                    <div class="hero bg-primary text-white">
-                        <div class="hero-inner">
-                            <h2>Welcome Back, Ujang!</h2>
-                            <p class="lead">This page is a place to manage posts, categories and more.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 mb-4">
-                    <div class="hero bg-primary text-white">
-                        <div class="hero-inner">
-                            <h2>Welcome, Ujang!</h2>
-                            <p class="lead">You almost arrived, complete the information about your account to complete
-                                registration.</p>
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
-                                        class="far fa-user"></i> Setup Account</a>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Laporan Pengaduan</h4>
+                            <div class="card-header-form">
+                                <form>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                        </div>
+                                        <a class="ml-2 btn btn-primary" href="" data-toggle="tooltip"
+                                            data-placement="bottom" title="Buat pengaduan baru">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 mb-4">
-                    <div class="hero align-items-center bg-success text-white">
-                        <div class="hero-inner text-center">
-                            <h2>Congratulations</h2>
-                            <p class="lead">You have successfully registered with our system. Next, you can log in to
-                                the dashboard with your account.</p>
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
-                                        class="fas fa-sign-in-alt"></i> Login</a>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>NIK</th>
+                                        <th>Nama</th>
+                                        <th>Foto</th>
+                                        <th>Isi Laporan</th>
+                                        <th>Status</th>
+                                        <th>Tanggal</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    @foreach ($pengaduans as $pengaduan)
+                                    <tr>
+                                        <td><a href="#">{{ $pengaduan->nik }}</a></td>
+                                        <td class="font-weight-600">{{ $pengaduan->nama }}</td>
+                                        <td>Foto</td>
+                                        <td>
+                                            {!! substr($pengaduan->isi_laporan, 0,30) !!}...
+                                        </td>
+                                        <td>
+                                            @if ($pengaduan->status == '0')
+                                            <div class="badge badge-danger">Belum di Verifikasi</div>
+                                            @elseif ($pengaduan->status == 'proses')
+                                            <div class="badge badge-warning">Dalam Proses</div>
+                                            @else
+                                            <div class="badge badge-success">Selesai</div>
+                                            @endif
+                                        </td>
+                                        <td>{{ Carbon\Carbon::parse($pengaduan->tgl_pengaduan)->format('d M Y') }}</td>
+                                        <td><a href="{{ route('petugas.pengaduan.detail', $pengaduan->id_pengaduan) }}"
+                                                class="btn btn-primary">Detail</a></td>
+                                    </tr>
+                                    @endforeach
+                                </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 mb-4">
-                    <div class="hero text-white hero-bg-image hero-bg-parallax"
-                        data-background="../assets/img/unsplash/andre-benz-1214056-unsplash.jpg">
-                        <div class="hero-inner">
-                            <h2>Welcome, Ujang!</h2>
-                            <p class="lead">You almost arrived, complete the information about your account to complete
-                                registration.</p>
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
-                                        class="far fa-user"></i> Setup Account</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 mb-4">
-                    <div class="hero text-white hero-bg-image"
-                        data-background="../assets/img/unsplash/eberhard-grossgasteiger-1207565-unsplash.jpg">
-                        <div class="hero-inner">
-                            <h2>Welcome, Ujang!</h2>
-                            <p class="lead">You almost arrived, complete the information about your account to complete
-                                registration.</p>
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
-                                        class="far fa-user"></i> Setup Account</a>
-                            </div>
+                            {{ $pengaduans->onEachSide(1)->links("layouts.admin.paginate") }}
                         </div>
                     </div>
                 </div>
