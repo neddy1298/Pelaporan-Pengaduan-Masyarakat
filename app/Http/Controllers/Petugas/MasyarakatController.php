@@ -10,7 +10,7 @@ class MasyarakatController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:masyarakat');
+        $this->middleware('auth:petugas');
     }
 
     /**
@@ -20,72 +20,26 @@ class MasyarakatController extends Controller
      */
     public function index()
     {
-        return view('masyarakat.home');
+        $users = Masyarakat::join('pengaduans', 'pengaduans.nik', '=', 'masyarakats.nik')
+        ->latest('masyarakats.created_at')->paginate('8');
+        return view('petugas.users.semua', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function detail($id)
     {
-        //
+        $user = Masyarakat::join('pengaduans', 'pengaduans.nik', '=', 'masyarakats.nik')
+        ->where('masyarakats.id', $id)->get();
+        return view('petugas.users.detail', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function search(Request $request, $search)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Masyarakat  $masyarakat
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Masyarakat $masyarakat)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Masyarakat  $masyarakat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Masyarakat $masyarakat)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Masyarakat  $masyarakat
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Masyarakat $masyarakat)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Masyarakat  $masyarakat
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Masyarakat $masyarakat)
-    {
-        //
+        $search = $request->search;
+        $users= Masyarakat::join('pengaduans', 'pengaduans.nik', '=', 'masyarakats.nik')
+        ->where('masyarakats.nik', $search)
+        ->orWhere('masyarakats.nama', $search)
+        ->orWhere('masyarakats.email', $search)
+        ->latest('masyrakats.created_at')->get();
+        return view('petugas.users.detail', compact('users'));
     }
 }

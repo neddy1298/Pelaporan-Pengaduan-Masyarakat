@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.admin.app', ['page' => 'Tanggapan', 'subpage' => $custome])
 @section('content')
 
 <!-- Main Content -->
@@ -20,11 +20,12 @@
                         <div class="card-header">
                             <h4>Tanggapan</h4>
                             <div class="card-header-form">
-                                <form>
+                                <form action="{{ route('petugas.tanggapan.search') }}" method="POST">
+                                    @csrf
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
+                                        <input type="text" class="form-control" placeholder="Search" name="search">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                            <input type="submit" class="btn btn-primary" value="Search">
                                         </div>
                                     </div>
                                 </form>
@@ -36,7 +37,8 @@
                                     <tr>
                                         <th>Nama Petugas</th>
                                         <th>Isi Laporan</th>
-                                        <th>Status</th>
+                                        <th class="text-center">Id Pengaduan</th>
+                                        <th class="text-center">Status</th>
                                         <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
@@ -47,7 +49,10 @@
                                         <td>
                                             {!! substr($tanggapan->tanggapan, 0,100) !!}...
                                         </td>
-                                        <td>
+                                        <td class="text-center">
+                                            {{ $tanggapan->id_pengaduan }}
+                                        </td>
+                                        <td class="text-center">
                                             @if ($tanggapan->status == '0')
                                             <div class="badge badge-danger">Belum di Verifikasi</div>
                                             @elseif ($tanggapan->status == 'proses')

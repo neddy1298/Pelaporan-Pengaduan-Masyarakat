@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.admin.app', ['page' => 'Pengaduan', 'subpage' => $custome])
 @section('content')
 
 <!-- Main Content -->
@@ -20,11 +20,12 @@
                         <div class="card-header">
                             <h4>Laporan Pengaduan</h4>
                             <div class="card-header-form">
-                                <form>
+                                <form action="{{ route('petugas.pengaduan.search') }}" method="POST">
+                                    @csrf
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
+                                        <input type="text" class="form-control" placeholder="Search" name="search">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                            <input type="submit" class="btn btn-primary" value="Search">
                                         </div>
                                     </div>
                                 </form>
@@ -35,10 +36,10 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <th>NIK</th>
-                                        <th>Nama</th>
+                                        <th>Nama Pelapor</th>
                                         <th>Foto</th>
                                         <th>Isi Laporan</th>
-                                        <th>Status</th>
+                                        <th class="text-center">Status</th>
                                         <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
@@ -47,11 +48,18 @@
                                     <tr>
                                         <td><a href="#">{{ $pengaduan->nik }}</a></td>
                                         <td class="font-weight-600">{{ $pengaduan->nama }}</td>
-                                        <td>Foto</td>
+                                        <td>
+                                            <div class="gallery">
+                                                <div class="gallery-item"
+                                                    data-image="{{ asset('template') }}/img/unsplash/andre-benz-1214056-unsplash.jpg"
+                                                    data-title="Image 8">
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>
                                             {!! substr($pengaduan->isi_laporan, 0,30) !!}...
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             @if ($pengaduan->status == '0')
                                             <div class="badge badge-danger">Belum di Verifikasi</div>
                                             @elseif ($pengaduan->status == 'proses')

@@ -32,24 +32,23 @@ class PengaduanController extends Controller
         $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
         ->select('pengaduans.*','masyarakats.nama')->latest('tgl_pengaduan')
         ->where('pengaduans.status', $custome)->paginate(8);
-        return view('petugas.pengaduan.custome', compact('pengaduans'));
+        $custome = $custome;
+        return view('petugas.pengaduan.custome', compact('pengaduans', 'custome'));
     }
 
     public function search(Request $request)
     {
+
+        $search = $request->search;
+
         $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
-        ->select('pengaduans.*','masyarakats.nama');
-
-		$search = $request->search;
-
-        $pengaduan = $pengaduans
+        ->select('pengaduans.*','masyarakats.nama')
         ->where('pengaduans.nik','like',"%".$search."%")
-        ->orWhere('pengaduans.nama','like',"%".$search."%")
+        ->orWhere('masyarakats.nama','like',"%".$search."%")
         ->orWhere('pengaduans.isi_laporan','like',"%".$search."%")
         ->paginate(8);
 
-        return $pengaduan;
-        return view('petugas.pengaduan.semua', compact('pengaduans'));
+        return view('petugas.pengaduan.search', compact('pengaduans', 'search'));
     }
 
     public function detail($id)

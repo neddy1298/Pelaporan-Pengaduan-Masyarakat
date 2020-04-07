@@ -47,21 +47,18 @@ class TanggapanController extends Controller
         return view('petugas.tanggapan.detail', compact('pengaduan', 'tanggapan'));
     }
 
-    public function cari(Request $request)
+    public function search(Request $request)
     {
-        dump('test');
-        // $search = $request->cari;
-        // return $search;
-        // $tanggapans = Tanggapan::join('petugas', 'petugas.id_petugas' ,'=','tanggapans.id_petugas')
-        // ->join('pengaduans', 'pengaduans.id_pengaduan' ,'=','tanggapans.id_pengaduan')
-        // ->select('tanggapans.*', 'petugas.nama_petugas', 'pengaduans.nik', 'pengaduans.isi_laporan', 'pengaduans.status', 'pengaduans.foto')
-        // ->latest('tgl_tanggapan')
-        // ->where('pengaduans.nik','like',"%".$search."%")
-        // ->orWhere('tanggapans.nama_petugas','like',"%".$search."%")
-        // ->paginate(8);
+        $search = $request->search;
+        $tanggapans = Tanggapan::join('petugas', 'petugas.id_petugas' ,'=','tanggapans.id_petugas')
+        ->join('pengaduans', 'pengaduans.id_pengaduan' ,'=','tanggapans.id_pengaduan')
+        ->select('tanggapans.*', 'petugas.nama_petugas','pengaduans.status',)
+        ->latest('tgl_tanggapan')
+        ->where('pengaduans.nik','like',"%".$search."%")
+        ->orWhere('petugas.nama_petugas','like',"%".$search."%")
+        ->paginate(8);
 
-        // return $pengaduan;
-        // return view('petugas.tanggapan.search', compact('tanggapans'));
+        return view('petugas.tanggapan.search', compact('tanggapans', 'search'));
     }
 
     /**

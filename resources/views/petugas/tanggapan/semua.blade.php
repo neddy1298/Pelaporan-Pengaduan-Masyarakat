@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.admin.app', ['page' => 'Tanggapan', 'subpage' => 'Semua'])
 @section('content')
 
 <!-- Main Content -->
@@ -20,15 +20,13 @@
                         <div class="card-header">
                             <h4>Laporan Tanggapan</h4>
                             <div class="card-header-form">
-                                <form action="{{ route('petugas.tanggapan.cari') }}" method="GET">
+                                <form action="{{ route('petugas.tanggapan.search') }}" method="POST">
                                     @csrf
                                     <div class="input-group">
-
                                         <input type="text" class="form-control" placeholder="Search" name="search">
                                         <div class="input-group-btn">
                                             <input type="submit" class="btn btn-primary" value="Search">
                                         </div>
-
                                     </div>
                                 </form>
                             </div>
@@ -39,7 +37,8 @@
                                     <tr>
                                         <th>Nama Petugas</th>
                                         <th>Tanggapan</th>
-                                        <th>Status</th>
+                                        <th class="text-center">Id Pengaduan</th>
+                                        <th class="text-center">Status</th>
                                         <th>Tanggal</th>
                                         <th>Action</th>
                                     </tr>
@@ -50,7 +49,8 @@
                                         <td>
                                             {!! substr($tanggapan->tanggapan, 0,100) !!}...
                                         </td>
-                                        <td>
+                                        <td class="text-center">{{ $tanggapan->id_pengaduan }}</td>
+                                        <td class="text-center">
                                             @if ($tanggapan->status == '0')
                                             <div class="badge badge-danger">Belum di Verifikasi</div>
                                             @elseif ($tanggapan->status == 'proses')
@@ -59,7 +59,7 @@
                                             <div class="badge badge-success">Selesai</div>
                                             @endif
                                         </td>
-                                        <td>{{ Carbon\Carbon::parse($tanggapan->tgl_tanggapan)->format('d M Y') }}</td>
+                                        <td>{{ Carbon\Carbon::parse($tanggapan->tgl_tanggapan)->format('d M, Y') }}</td>
                                         <td><a href="{{ route('petugas.tanggapan.detail', $tanggapan->id_tanggapan) }}"
                                                 class="btn btn-primary">Detail</a></td>
                                     </tr>

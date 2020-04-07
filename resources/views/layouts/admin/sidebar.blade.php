@@ -14,35 +14,42 @@
                     <span>Dashboard</span></a>
             </li>
             <li class="menu-header">Laporan</li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ ( $page == 'Pengaduan') ? 'active' : '' }}">
                 <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="ion ion-ios-download-outline"></i>
                     <span>Pengaduan</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('petugas.pengaduan') }}">Semua Pengaduan</a></li>
-                    <li><a class="nav-link" href="{{ route('petugas.pengaduan.custome', '0') }}">Belum Verifikasi</a>
+                    <li class="{{ ( $subpage == 'Semua') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('petugas.pengaduan') }}">Semua Pengaduan</a></li>
+                    <li class="{{ ( $subpage == '0') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('petugas.pengaduan.custome', '0') }}">Belum Verifikasi</a>
                     </li>
-                    <li><a class="nav-link" href="{{ route('petugas.pengaduan.custome', 'proses') }}">Dalam Proses</a>
+                    <li class="{{ ( $subpage == 'proses') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('petugas.pengaduan.custome', 'proses') }}">Dalam Proses</a>
                     </li>
-                    <li><a class="nav-link" href="{{ route('petugas.pengaduan.custome', 'selesai') }}">Pengaduan
+                    <li class="{{ ( $subpage == 'selesai') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('petugas.pengaduan.custome', 'selesai') }}">Pengaduan
                             Selesai</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown {{ ( $page == 'Tanggapan') ? 'active' : '' }}">
                 <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i
                         class="ion ion-ios-download-outline"></i>
                     <span>Tanggapan</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('petugas.tanggapan') }}">Semua Tanggapan</a></li>
-                    <li><a class="nav-link" href="{{ route('petugas.tanggapan.custome', 'proses') }}">Proses
+                    <li class=" {{ ( $subpage == 'Semua') ? 'active' : '' }} "><a class="nav-link"
+                            href="{{ route('petugas.tanggapan') }}">Semua Tanggapan</a></li>
+                    <li class=" {{ ( $subpage == 'proses') ? 'active' : '' }} "><a class="nav-link"
+                            href="{{ route('petugas.tanggapan.custome', 'proses') }}">Proses
                             Penanggapan</a></li>
-                    <li><a class="nav-link" href="{{ route('petugas.tanggapan.custome', 'selesai') }}">Selesai
+                    <li class=" {{ ( $subpage == 'selesai') ? 'active' : '' }} "><a class="nav-link"
+                            href="{{ route('petugas.tanggapan.custome', 'selesai') }}">Selesai
                             Ditanggapi</a></li>
                 </ul>
             </li>
             <li class="menu-header">Users</li>
             <li>
-                <a href="{{ route('petugas.dashboard') }}" class="nav-link "><i
+                <a href="{{ route('petugas.user') }}" class="nav-link "><i
                         class="ion ion-ios-body"></i><span>Users</span></a>
             </li>
             <li>

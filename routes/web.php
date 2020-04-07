@@ -45,7 +45,7 @@ Route::prefix('admin')->group(function() {
         Route::get('/show/{custome}', 'Petugas\PengaduanController@index2')->name('petugas.pengaduan.custome');
         Route::get('/{id}', 'Petugas\PengaduanController@detail')->name('petugas.pengaduan.detail');
         Route::post('/{id}/update', 'Petugas\PengaduanController@update')->name('petugas.pengaduan.update');
-        Route::get('/search', 'Petugas\PengaduanController@search')->name('petugas.pengaduan.search');
+        Route::post('/search', 'Petugas\PengaduanController@search')->name('petugas.pengaduan.search');
     });
 
     // Admin Tanggapan
@@ -54,6 +54,13 @@ Route::prefix('admin')->group(function() {
         Route::get('/show/{custome}', 'Petugas\TanggapanController@index2')->name('petugas.tanggapan.custome');
         Route::get('/{id}', 'Petugas\TanggapanController@detail')->name('petugas.tanggapan.detail');
         Route::post('/create', 'Petugas\TanggapanController@store')->name('petugas.tanggapan.create');
-        Route::get('/search', 'Petugas\TanggapanController@search')->name('petugas.tanggapan.search');
+        Route::post('/search', 'Petugas\TanggapanController@search')->name('petugas.tanggapan.search');
+    });
+
+    // Admin Users
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', 'Petugas\MasyarakatController@index')->name('petugas.user');
+        Route::get('/{id}', 'Petugas\MasyarakatController@detail')->name('petugas.user.detail');
+        Route::post('/search', 'Petugas\MasyarakatController@search')->name('petugas.user.search');
     });
 }) ;

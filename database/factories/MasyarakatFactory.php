@@ -12,6 +12,7 @@ $factory->define(Masyarakat::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'username' => $faker->username,
         'password' => $faker->password,
-        'telp' => $faker->numerify('08##########')
+        'telp' => $faker->numerify('08##########'),
+        'active' => 0,
     ];
 });
