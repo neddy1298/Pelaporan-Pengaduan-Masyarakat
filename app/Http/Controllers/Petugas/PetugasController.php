@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Petugas;
 
 use App\Models\Petugas;
 use App\Models\Tanggapan;
+use Auth;
 use Illuminate\Http\Request;
 
 class PetugasController extends Controller
@@ -32,6 +33,22 @@ class PetugasController extends Controller
     }
 
     public function profile()
+    {
+        $user = Auth::user()->get()->first();
+        return view('petugas.admin.profile', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+
+        // $user = Petugas::find($id);
+        // return $user;
+        // Alert::success('Success!', 'Berhasil merubah profile');
+        // return view('petugas.admin.profile');
+        // return redirect()->back();
+    }
+
+    public function update2(Request $request, $id)
     {
         return view('petugas.admin.profile');
     }

@@ -74,8 +74,8 @@ Route::prefix('admin')->group(function() {
 
     // Profile
     Route::group(['prefix' => 'profile'], function () {
-        Route::get('/', 'Petugas\PetugasController@profile')->name('petugas.admin');
-        Route::post('/', 'Petugas\PetugasController@update')->name('petugas.admin.update');
-        Route::post('/', 'Petugas\PetugasController@update2')->name('petugas.admin.update2');
+        Route::get('/', 'Petugas\PetugasController@profile')->name('petugas.profile');
+        Route::post('/update/{$id}', 'Petugas\PetugasController@update')->name('petugas.update');
+        Route::post('/update2/{$id}', 'Petugas\PetugasController@update2')->name('petugas.update2');
     });
 }) ;
