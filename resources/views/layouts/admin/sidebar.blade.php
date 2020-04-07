@@ -48,12 +48,12 @@
                 </ul>
             </li>
             <li class="menu-header">Users</li>
-            <li>
+            <li class="nav-item dropdown {{ ( $page == 'Users') ? 'active' : '' }}">
                 <a href="{{ route('petugas.user') }}" class="nav-link "><i
                         class="ion ion-ios-body"></i><span>Users</span></a>
             </li>
-            <li>
-                <a href="{{ route('petugas.dashboard') }}" class="nav-link "><i
+            <li class="nav-item dropdown {{ ( $page == 'Admin') ? 'active' : '' }}">
+                <a href="{{ route('petugas.admin') }}" class="nav-link "><i
                         class="ion ion-ios-locked"></i><span>Admin</span></a>
             </li>
         </ul>

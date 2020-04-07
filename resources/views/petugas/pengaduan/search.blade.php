@@ -1,4 +1,4 @@
-@extends('layouts.admin.app', ['page' => 'Pangaduan', 'subpage' => 'Custome'])
+@extends('layouts.admin.app', ['page' => 'Pengaduan', 'subpage' => 'Custome'])
 @section('content')
 
 <!-- Main Content -->
