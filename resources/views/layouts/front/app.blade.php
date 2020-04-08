@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('front') }}/css/slick.css">
     <link rel="stylesheet" href="{{ asset('front') }}/css/nice-select.css">
     <link rel="stylesheet" href="{{ asset('front') }}/css/style.css">
+    <link rel="stylesheet" href="{{ asset('front') }}/css/responsive.css">
+
 
     <link rel="stylesheet" href="{{ asset('template') }}/node_modules/dropzone/dist/min/dropzone.min.css">
 </head>

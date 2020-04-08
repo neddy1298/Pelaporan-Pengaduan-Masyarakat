@@ -5,7 +5,7 @@
                 <!-- Logo -->
                 <div class="col-xl-2 col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="index.html"><img src="{{ asset('front') }}/img/logo/logo.png" alt=""></a>
+                        <a href="/#"><img src="{{ asset('front') }}/img/logo/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-10">
@@ -13,7 +13,7 @@
                     <div class="main-menu f-right d-none d-lg-block">
                         <nav>
                             <ul id="navigation">
-                                <li class="active"><a href="index.html"> Home</a></li>
+                                <li class="active"><a href="/#"> Home</a></li>
                                 @if (Auth::guest())
                                 <li><a href="{{ route('masyarakat.register') }}">Daftar</a></li>
                                 <li><a href="{{ route('masyarakat.login') }}">Masuk</a></li>

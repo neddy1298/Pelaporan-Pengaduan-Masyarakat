@@ -14,22 +14,26 @@
                             </h1>
                             <p data-animation="fadeInUp" data-delay=".8s">Sampaikan laporan Anda langsung kepada
                                 instansi pemerintah berwenang
-                                <!-- Slider btn -->
-                                <div class="slider-btns">
-                                    <!-- Hero-btn -->
-                                    @if (Auth::guest())
-                                    <a data-animation="fadeInLeft" data-delay="1.0s" class="btn radius-btn"
-                                        href="{{ route('masyarakat.login') }}">Masuk</a>
-                                    @else
-                                    <a data-animation="fadeInLeft" data-delay="1.0s" href="#pengaduan"
-                                        class="btn radius-btn">Tulis Laporan</a>
-                                    @endif
-                                    <!-- Video Btn -->
-                                    {{-- <a data-animation="fadeInRight" data-delay="1.0s"
+                                <h6 data-animation="fadeInRight" data-delay="1.0s">
+                                    <a href="#tata-cara" class="text-info">Ketahi caranya!</a>
+                                </h6>
+                            </p>
+                            <!-- Slider btn -->
+                            <div class="slider-btns">
+                                <!-- Hero-btn -->
+                                @if (Auth::guest())
+                                <a data-animation="fadeInLeft" data-delay="1.0s" class="btn card-btn1"
+                                    href="{{ route('masyarakat.login') }}">Masuk</a>
+                                @else
+                                <a data-animation="fadeInLeft" data-delay="1.0s" href="#pengaduan"
+                                    class="btn card-btn1">Tulis Laporan</a>
+                                @endif
+                                <!-- Video Btn -->
+                                {{-- <a data-animation="fadeInRight" data-delay="1.0s"
                                         class="popup-video video-btn ani-btn"
                                         href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><i
                                             class="fas fa-play"></i></a> --}}
-                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -56,11 +60,11 @@
                                 <div class="slider-btns">
                                     <!-- Hero-btn -->
                                     @if (Auth::guest())
-                                    <a data-animation="fadeInLeft" data-delay="1.0s" class="btn radius-btn"
+                                    <a data-animation="fadeInLeft" data-delay="1.0s" class="btn card-btn1"
                                         href="{{ route('masyarakat.login') }}">Masuk</a>
                                     @else
                                     <a data-animation="fadeInLeft" data-delay="1.0s" href="#pengaduan"
-                                        class="btn radius-btn">Tulis Laporan</a>
+                                        class="btn card-btn1">Tulis Laporan</a>
                                     @endif
                                     <!-- Video Btn -->
                                     {{-- <a data-animation="fadeInRight" data-delay="1.0s"
@@ -116,7 +120,8 @@
             <div class="col-xl-12 col-lg-12 col-md-12">
                 <div class="single-card text-center mb-30">
                     <div class="card-bottom">
-                        <form action="{{ route('masyarakat.pengaduan.submit') }}" method="POST">
+                        <form action="{{ route('masyarakat.pengaduan.submit') }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="mt-10 mb-5">
                                 <textarea class="single-textarea form-control w-100" name="isi_laporan" id="message"
@@ -127,7 +132,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="text-left">
-                                        <label class="btn danger-border radius e-large">
+                                        <label class="btn card-btn1 radius e-large">
                                             <input type="file" name="foto" accept=".png, .jpg, .jpeg" id="check"
                                                 onchange="validateFileType()" required />
                                             Upload Gambar
@@ -151,7 +156,8 @@
                                                 if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
                                                     //TO DO
                                                 }else{
-                                                    alert("Only jpg/jpeg and png files are allowed!");
+                                                    document.getElementById("check").value = '';
+                                                    alert("Pastikan format file benar!");
                                                 }
                                             }
                                         </script>
@@ -174,7 +180,7 @@
 <!-- Pricing Card End -->
 @endauth
 <!-- Services Area Start -->
-<section class="service-area sky-blue section-padding2">
+<section class="service-area sky-blue section-padding2" id="tata-cara">
     <div class="container">
         <!-- Section Tittle -->
         <div class="row d-flex justify-content-center">
@@ -263,43 +269,6 @@
     </div>
 </section>
 <!-- Services Area End -->
-<!-- Applic App Start -->
-<div class="applic-apps section-padding2">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- slider Heading -->
-            <div class="col-xl-4 col-lg-4 col-md-8">
-                <div class="single-cases-info mb-30">
-                    <h3>Applic Apps<br> Screenshot</h3>
-                    <p>Lorem ipsum dolor sit amet, consecadipiscing elit, sed do eiusmod tempor incididunt ut
-                        ore et dolore magna aliqua. Quis ipsum suspendisse gravida. Risus commodo viverra
-                        maecenasan lacus vel facilisis. </p>
-                </div>
-            </div>
-            <!-- OwL -->
-            <div class="col-xl-8 col-lg-8 col-md-col-md-7">
-                <div class="app-active owl-carousel">
-                    <div class="single-cases-img">
-                        <img src="{{ asset('front') }}/img/gallery/App1.png" alt="">
-                    </div>
-                    <div class="single-cases-img">
-                        <img src="{{ asset('front') }}/img/gallery/App2.png" alt="">
-                    </div>
-                    <div class="single-cases-img">
-                        <img src="{{ asset('front') }}/img/gallery/App3.png" alt="">
-                    </div>
-                    <div class="single-cases-img">
-                        <img src="{{ asset('front') }}/img/gallery/App2.png" alt="">
-                    </div>
-                    <div class="single-cases-img">
-                        <img src="{{ asset('front') }}/img/gallery/App1.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Applic App End -->
 <!-- Our Customer Start -->
 <div class="our-customer section-padd-top30">
     <div class="container-fluid">
@@ -308,56 +277,26 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-xl-8">
                     <div class="section-tittle text-center">
-                        <h2>What Our Customers<br> Have to Say</h2>
+                        <h2>Laporan Terselesaikan</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="customar-active dot-style d-flex dot-style">
+                        @foreach ($samples as $sample)
+
                         <div class="single-customer mb-100">
                             <div class="what-img">
                                 <img src="{{ asset('front') }}/img/shape/man1.png" alt="">
                             </div>
                             <div class="what-cap">
-                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                <h4><a href="#">{{ $sample->nama }}</a></h4>
                                 <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
                                     ex ea commodo consequat duis aute irure dolor in represse.</p>
                             </div>
                         </div>
-
-                        <div class="single-customer mb-100">
-                            <div class="what-img">
-                                <img src="{{ asset('front') }}/img/shape/man2.png" alt="">
-                            </div>
-                            <div class="what-cap">
-                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
-                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
-                            </div>
-                        </div>
-
-                        <div class="single-customer mb-100">
-                            <div class="what-img">
-                                <img src="{{ asset('front') }}/img/shape/man3.png" alt="">
-                            </div>
-                            <div class="what-cap">
-                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
-                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
-                            </div>
-                        </div>
-
-                        <div class="single-customer mb-100">
-                            <div class="what-img">
-                                <img src="{{ asset('front') }}/img/shape/man2.png" alt="">
-                            </div>
-                            <div class="what-cap">
-                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
-                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
-                            </div>
-                        </div>
+                        @endforeach
 
                     </div>
                 </div>

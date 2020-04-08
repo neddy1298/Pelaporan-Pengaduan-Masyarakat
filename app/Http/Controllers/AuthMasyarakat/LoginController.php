@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -35,7 +36,7 @@ class LoginController extends Controller
       // Attempt to log the user in
       if (Auth::guard('masyarakat')->attempt($credentials, $request->remember)) {
         // if successful, then redirect to their intended location
-        
+        Alert::success('Success!', 'Login berhasil!');
         return redirect()->intended(route('masyarakat.dashboard'));
       }
       // if unsuccessful, then redirect back to the login with the form data

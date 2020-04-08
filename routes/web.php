@@ -28,8 +28,15 @@ Route::post('/password/reset', 'AuthMasyarakat\ResetPasswordController@reset');
 
 
 Route::get('/', 'Masyarakat\HomeController@index')->name('masyarakat.dashboard');
-Route::get('/pengaduan', 'Masyarakat\HomeController@index')->name('masyarakat.pengaduan');
-Route::post('/pengaduan/submit', 'Masyarakat\PengaduanController@post')->name('masyarakat.pengaduan.submit');
+// Soon
+Route::get('/profile', 'Masyarakat\ProfileController@index')->name('masyarakat.profile');
+
+Route::group(['prefix' => 'pengaduan'], function () {
+    Route::get('/', 'Masyarakat\PengaduanController@index')->name('masyarakat.pengaduan.user')->middleware('auth:masyarakat');
+    Route::get('/all', 'Masyarakat\PengaduanController@index2')->name('masyarakat.pengaduan');
+    Route::post('/submit', 'Masyarakat\PengaduanController@post')->name('masyarakat.pengaduan.submit')->middleware('auth:masyarakat');
+
+});
 
 
 // Admin
