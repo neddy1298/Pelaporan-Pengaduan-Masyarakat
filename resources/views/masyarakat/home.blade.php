@@ -1,4 +1,4 @@
-@extends('layouts.front.app')
+@extends('layouts.front.app', ['page' => 'Home'])
 
 @section('content')
 <!-- Slider Area Start-->

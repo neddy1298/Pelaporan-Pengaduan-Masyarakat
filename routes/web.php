@@ -34,6 +34,7 @@ Route::get('/profile', 'Masyarakat\ProfileController@index')->name('masyarakat.p
 Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', 'Masyarakat\PengaduanController@index')->name('masyarakat.pengaduan.user')->middleware('auth:masyarakat');
     Route::get('/all', 'Masyarakat\PengaduanController@index2')->name('masyarakat.pengaduan');
+    Route::get('/{id}', 'Masyarakat\PengaduanController@detail')->name('masyarakat.pengaduan.detail');
     Route::post('/submit', 'Masyarakat\PengaduanController@post')->name('masyarakat.pengaduan.submit')->middleware('auth:masyarakat');
 
 });

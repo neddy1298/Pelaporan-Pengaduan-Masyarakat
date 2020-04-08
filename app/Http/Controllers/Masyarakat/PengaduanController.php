@@ -13,21 +13,52 @@ class PengaduanController extends Controller
 
     public function index()
     {
-        $pengaduans = Pengaduan::where('status', 'proses')
-        ->orWhere('status', 'selesai')
-        ->paginate(5);
+        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
+        ->select('pengaduans.*', 'masyarakats.nama')
+        ->where('pengaduans.nik', Auth::user()->nik)
+        ->latest('tgl_pengaduan')
+        ->paginate(4);
 
-        $pengaduans->where('masyarakats.nik', Auth::user()->nik);
-        return view('masyarakat.pengaduan.user', compact('pengaduans'));
+        $countSem = Pengaduan::latest()->take(4)->get();
+        $countKu = $pengaduans;
+
+        return view('masyarakat.pengaduan.user', compact('pengaduans', 'countKu', 'countSem'));
     }
 
     public function index2()
     {
         $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
         ->select('pengaduans.*','masyarakats.nama')
-        ->where('status', 'proses|selesai')
+        ->where('status', 'selesai')
+        ->latest('tgl_pengaduan')
+        ->paginate(5);
+
+        $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
+        $countSem = Pengaduan::latest()->take(4)->get();
+
+        return view('masyarakat.pengaduan.semua', compact('pengaduans', 'countKu', 'countSem'));
+    }
+
+    public function detail($id)
+    {
+        $pengaduan = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
+        ->select('pengaduans.*','masyarakats.nama')
+        ->where('id_pengaduan', $id)
+        ->get()->first();
+
+        $tanggapans = Tanggapan::join('petugas', 'petugas.id_petugas', '=', 'tanggapans.id_petugas')
+        ->select('tanggapans.*','petugas.nama_petugas')
+        ->where('tanggapans.id_pengaduan', $id)
         ->get();
-        return view('masyarakat.pengaduan.semua', compact('pengaduans'));
+
+        $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
+        $countSem = Pengaduan::latest()->take(4)->get();
+        $prev = Pengaduan::where('status', 'selesai')->where('id_pengaduan', '<', $id)->max('id_pengaduan');
+        $prevContent = Pengaduan::where('id_pengaduan', $prev)->get()->first();
+        $next = Pengaduan::where('status', 'selesai')->where('id_pengaduan', '>', $id)->min('id_pengaduan');
+        $nextContent = Pengaduan::where('id_pengaduan', $next)->get()->first();
+
+        return view('masyarakat.pengaduan.detail', compact('pengaduan', 'tanggapans', 'prevContent', 'nextContent', 'countKu', 'countSem'));
     }
 
 

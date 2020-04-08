@@ -11,6 +11,7 @@ $factory->define(Pengaduan::class, function (Faker $faker) {
     return [
         'tgl_pengaduan' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'nik' => $faker->randomElement($masyarakat),
+        'judul' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'isi_laporan' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'foto' => 'default.jpg',
         'status' => $faker->randomElement(['0', 'proses', 'selesai']),

@@ -13,7 +13,15 @@
                     <div class="main-menu f-right d-none d-lg-block">
                         <nav>
                             <ul id="navigation">
-                                <li class="active"><a href="/#"> Home</a></li>
+                                <li class="{{ ( $page == 'Home') ? 'active' : '' }}"><a href="/#"> Home</a></li>
+                                <li class="{{( $page == 'Pengaduan') ? 'active' : '' }}"><a
+                                        href="{{ route('masyarakat.pengaduan') }}">Pengaduan</a>
+                                    <ul class="submenu">
+                                        <li><a href="{{ route('masyarakat.pengaduan.user') }}">Pengaduan Kamu</a></li>
+                                        <li><a href="{{ route('masyarakat.pengaduan') }}">Pengaduan <br> Semua Orang</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 @if (Auth::guest())
                                 <li><a href="{{ route('masyarakat.register') }}">Daftar</a></li>
                                 <li><a href="{{ route('masyarakat.login') }}">Masuk</a></li>
