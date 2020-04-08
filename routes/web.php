@@ -13,24 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Auth::routes();
+
+// Auth
+Route::get('/login','AuthMasyarakat\LoginController@showLoginForm')->name('masyarakat.login');
+Route::post('/login', 'AuthMasyarakat\LoginController@login')->name('masyarakat.login.submit');
+Route::get('/logout', 'AuthMasyarakat\LoginController@logoutMasyarakat')->name('masyarakat.logout');
+Route::get('/register', 'AuthMasyarakat\RegisterController@showRegisterForm')->name('masyarakat.register');
+Route::post('/register/submit', 'AuthMasyarakat\RegisterController@register')->name('masyarakat.register.submit');
+Route::get('/password/reset', 'AuthMasyarakat\ForgotPasswordController@showLinkRequestForm')->name('masyarakat.password.request');
+Route::post('/password/email', 'AuthMasyarakat\ForgotPasswordController@sendResetLinkEmail')->name('masyarakat.password.email');
+Route::get('/password/reset/{token}', 'AuthMasyarakat\ResetPasswordController@showResetForm')->name('masyarakat.password.reset');
+Route::post('/password/reset', 'AuthMasyarakat\ResetPasswordController@reset');
 
 
-Route::prefix('masyarakat')->group(function() {
-    Route::get('/', 'MasyarakatController@index')->name('masyarakat.dashboard');
-    Route::get('/login','AuthMasyarakat\LoginController@showLoginForm')->name('masyarakat.login');
-    Route::post('/login', 'AuthMasyarakat\LoginController@login')->name('masyarakat.login.submit');
-    Route::get('/logout', 'AuthMasyarakat\LoginController@logoutMasyarakat')->name('masyarakat.logout');
-    Route::get('/password/reset', 'AuthMasyarakat\ForgotPasswordController@showLinkRequestForm')->name('masyarakat.password.request');
-    Route::post('/password/email', 'AuthMasyarakat\ForgotPasswordController@sendResetLinkEmail')->name('masyarakat.password.email');
-    Route::get('/password/reset/{token}', 'AuthMasyarakat\ResetPasswordController@showResetForm')->name('masyarakat.password.reset');
-    Route::post('/password/reset', 'AuthMasyarakat\ResetPasswordController@reset');
-}) ;
+Route::get('/', 'Masyarakat\HomeController@index')->name('masyarakat.dashboard');
+Route::get('/pengaduan', 'Masyarakat\HomeController@index')->name('masyarakat.pengaduan');
+Route::post('/pengaduan/submit', 'Masyarakat\PengaduanController@post')->name('masyarakat.pengaduan.submit');
+
 
 // Admin
 Route::prefix('admin')->group(function() {
+    // Auth
     Route::get('/', 'Petugas\HomeController@index')->name('petugas.dashboard');
     Route::get('/login','AuthPetugas\LoginController@showLoginForm')->name('petugas.login');
     Route::post('/login', 'AuthPetugas\LoginController@login')->name('petugas.login.submit');

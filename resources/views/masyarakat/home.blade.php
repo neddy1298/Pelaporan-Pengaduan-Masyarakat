@@ -1,98 +1,401 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.front.app')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+@section('content')
+<!-- Slider Area Start-->
+<div class="slider-area ">
+    <div class="slider-active">
+        <div class="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} {{ Auth::user()->nama }}{{ Auth::user()->nama_petugas, }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('masyarakat.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('masyarakat.logout') }}" method="GET" style="display: none;">
-                                        @csrf
-                                    </form>
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6 col-md-9 ">
+                        <div class="hero__caption">
+                            <h1 data-animation="fadeInUp" data-delay=".6s">Layanan Aspirasi dan Pengaduan Online
+                                Masyarakat
+                            </h1>
+                            <p data-animation="fadeInUp" data-delay=".8s">Sampaikan laporan Anda langsung kepada
+                                instansi pemerintah berwenang
+                                <!-- Slider btn -->
+                                <div class="slider-btns">
+                                    <!-- Hero-btn -->
+                                    @if (Auth::guest())
+                                    <a data-animation="fadeInLeft" data-delay="1.0s" class="btn radius-btn"
+                                        href="{{ route('masyarakat.login') }}">Masuk</a>
+                                    @else
+                                    <a data-animation="fadeInLeft" data-delay="1.0s" href="#pengaduan"
+                                        class="btn radius-btn">Tulis Laporan</a>
+                                    @endif
+                                    <!-- Video Btn -->
+                                    {{-- <a data-animation="fadeInRight" data-delay="1.0s"
+                                        class="popup-video video-btn ani-btn"
+                                        href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><i
+                                            class="fas fa-play"></i></a> --}}
                                 </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">Dashboard Masyarakat</div>
-
-                            <div class="card-body">
-                                @if (session('status'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-
-                                You are logged in, as Masyarakat!
-                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero__img d-none d-lg-block f-right" data-animation="fadeInRight" data-delay="1s">
+                            <img src="{{ asset('template') }}/img/undraw/undraw_posting_photo_v65l.png" alt=""
+                                width="100%">
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
+        {{-- slide 2 --}}
+        <div class="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6 col-md-9 ">
+                        <div class="hero__caption">
+                            <h1 data-animation="fadeInUp" data-delay=".6s">Layanan Aspirasi dan Pengaduan Online
+                                Masyarakat
+                            </h1>
+                            <p data-animation="fadeInUp" data-delay=".8s">Sampaikan laporan Anda langsung kepada
+                                instansi pemerintah berwenang
+                                <!-- Slider btn -->
+                                <div class="slider-btns">
+                                    <!-- Hero-btn -->
+                                    @if (Auth::guest())
+                                    <a data-animation="fadeInLeft" data-delay="1.0s" class="btn radius-btn"
+                                        href="{{ route('masyarakat.login') }}">Masuk</a>
+                                    @else
+                                    <a data-animation="fadeInLeft" data-delay="1.0s" href="#pengaduan"
+                                        class="btn radius-btn">Tulis Laporan</a>
+                                    @endif
+                                    <!-- Video Btn -->
+                                    {{-- <a data-animation="fadeInRight" data-delay="1.0s"
+                                    class="popup-video video-btn ani-btn"
+                                    href="https://www.youtube.com/watch?v=1aP-TXUpNoU"><i
+                                        class="fas fa-play"></i></a> --}}
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero__img d-none d-lg-block f-right" data-animation="fadeInRight" data-delay="1s">
+                            <img src="{{ asset('template') }}/img/undraw/undraw_social_distancing_2g0u.png" alt=""
+                                width="100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- End slide 2 --}}
     </div>
-</body>
-</html>
+</div>
+<!-- Slider Area End -->
+<style>
+    * {
+        scroll-behavior: smooth;
+    }
+</style>
+@auth
+<!-- Best Pricing Start -->
+<section class="best-pricing pricing-padding" data-background="{{ asset('front') }}/img/gallery/best_pricingbg.jpg"
+    id="pengaduan">
+    <div class="container">
+        <!-- Section Tittle -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-12 col-md-12">
+                <div class="section-tittle mb-30 text-center">
+                    <h2 class="text-white">Tulis Laporan Anda Disini
+                        <p class="text-white">Laporkan keluhan atau
+                            aspirasi anda dengan jelas dan lengkap
+                        </p>
+                        </h3>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</section>
+<!-- Best Pricing End -->
+<!-- Pricing Card Start -->
+<div class="pricing-card-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="single-card text-center mb-30">
+                    <div class="card-bottom">
+                        <form action="{{ route('masyarakat.pengaduan.submit') }}" method="POST">
+                            @csrf
+                            <div class="mt-10 mb-5">
+                                <textarea class="single-textarea form-control w-100" name="isi_laporan" id="message"
+                                    cols="30" rows="9" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message"
+                                    required>{{ old('isi_laporan') }}</textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="text-left">
+                                        <label class="btn danger-border radius e-large">
+                                            <input type="file" name="foto" accept=".png, .jpg, .jpeg" id="check"
+                                                onchange="validateFileType()" required />
+                                            Upload Gambar
+                                        </label>
+                                        <style>
+                                            input[type="file"] {
+                                                display: none;
+                                            }
+
+                                            .custom-file-upload {
+                                                display: inline-block;
+                                                padding: 6px 12px;
+                                                cursor: pointer;
+                                            }
+                                        </style>
+                                        <script type="text/javascript">
+                                            function validateFileType(){
+                                                var fileName = document.getElementById("check").value;
+                                                var idxDot = fileName.lastIndexOf(".") + 1;
+                                                var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+                                                if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+                                                    //TO DO
+                                                }else{
+                                                    alert("Only jpg/jpeg and png files are allowed!");
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <input type="submit" class="genric-btn danger-border radius e-large"
+                                            value="LAPOR!">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pricing Card End -->
+@endauth
+<!-- Services Area Start -->
+<section class="service-area sky-blue section-padding2">
+    <div class="container">
+        <!-- Section Tittle -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-tittle text-center">
+                    <h2>Bagaimana Cara Saya Membuat Pengaduan?</h2>
+                </div>
+            </div>
+        </div>
+        <!-- Section caption -->
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="services-caption text-center mb-30">
+                    <div class="service-icon">
+                        <span class="flaticon-businessman"></span>
+                    </div>
+                    <div class="service-cap">
+                        <h4><a href="#">Login</a></h4>
+                        <p>Pastikan anda login dan jika melum memiliki akun dapat mendaftar <a class="text-primary"
+                                href="{{ route('masyarakat.register') }}">disini.</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="services-caption text-center mb-30">
+                    <div class="service-icon">
+                        <span class=""><img src="{{ asset('front') }}/img/freepik/pen-filled-writing-tool.png"
+                                width="40%"></span>
+
+                    </div>
+                    <div class="service-cap">
+                        <h4><a href="#pengaduan">Tulis Laporan</a></h4>
+                        <p>Laporkan keluhan atau aspirasi anda dengan jelas dan lengkap.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="services-caption text-center mb-30">
+                    <div class="service-icon">
+                        <span class=""><img src="{{ asset('front') }}/img/freepik/list.png" width="45%"></span>
+                    </div>
+                    <div class="service-cap">
+                        <h4><a href="#">Proses Verifikasi</a></h4>
+                        <p>Dalam 3 hari, laporan Anda akan diverifikasi dan diteruskan kepada instansi berwenang.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+                <div class="services-caption text-center mb-30">
+                    <div class="service-icon">
+                        <span class=""><img src="{{ asset('front') }}/img/freepik/support.png" width="45%"></span>
+                    </div>
+                    <div class="service-cap">
+                        <h4><a href="#">Proses Tindak Lanjut</a></h4>
+                        <p>Dalam 5 hari, instansi akan menindaklanjuti dan membalas laporan Anda.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-6">
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="services-caption text-center mb-30">
+                    <div class="service-icon">
+                        <span class=""><img src="{{ asset('front') }}/img/freepik/speech-bubble.png" width="45%"></span>
+                    </div>
+                    <div class="service-cap">
+                        <h4><a href="#">Beri Tanggapan</a></h4>
+                        <p>Anda dapat menanggapi kembali balasan yang diberikan oleh instansi dalam waktu 10 hari.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <div class="services-caption text-center mb-30">
+                    <div class="service-icon">
+                        <span class="flaticon-plane"></span>
+                    </div>
+                    <div class="service-cap">
+                        <h4><a href="#">Selesai</a></h4>
+                        <p>Laporan Anda akan terus ditindaklanjuti hingga terselesaikan </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-6">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Area End -->
+<!-- Applic App Start -->
+<div class="applic-apps section-padding2">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- slider Heading -->
+            <div class="col-xl-4 col-lg-4 col-md-8">
+                <div class="single-cases-info mb-30">
+                    <h3>Applic Apps<br> Screenshot</h3>
+                    <p>Lorem ipsum dolor sit amet, consecadipiscing elit, sed do eiusmod tempor incididunt ut
+                        ore et dolore magna aliqua. Quis ipsum suspendisse gravida. Risus commodo viverra
+                        maecenasan lacus vel facilisis. </p>
+                </div>
+            </div>
+            <!-- OwL -->
+            <div class="col-xl-8 col-lg-8 col-md-col-md-7">
+                <div class="app-active owl-carousel">
+                    <div class="single-cases-img">
+                        <img src="{{ asset('front') }}/img/gallery/App1.png" alt="">
+                    </div>
+                    <div class="single-cases-img">
+                        <img src="{{ asset('front') }}/img/gallery/App2.png" alt="">
+                    </div>
+                    <div class="single-cases-img">
+                        <img src="{{ asset('front') }}/img/gallery/App3.png" alt="">
+                    </div>
+                    <div class="single-cases-img">
+                        <img src="{{ asset('front') }}/img/gallery/App2.png" alt="">
+                    </div>
+                    <div class="single-cases-img">
+                        <img src="{{ asset('front') }}/img/gallery/App1.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Applic App End -->
+<!-- Our Customer Start -->
+<div class="our-customer section-padd-top30">
+    <div class="container-fluid">
+        <div class="our-customer-wrapper">
+            <!-- Section Tittle -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-xl-8">
+                    <div class="section-tittle text-center">
+                        <h2>What Our Customers<br> Have to Say</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="customar-active dot-style d-flex dot-style">
+                        <div class="single-customer mb-100">
+                            <div class="what-img">
+                                <img src="{{ asset('front') }}/img/shape/man1.png" alt="">
+                            </div>
+                            <div class="what-cap">
+                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
+                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
+                            </div>
+                        </div>
+
+                        <div class="single-customer mb-100">
+                            <div class="what-img">
+                                <img src="{{ asset('front') }}/img/shape/man2.png" alt="">
+                            </div>
+                            <div class="what-cap">
+                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
+                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
+                            </div>
+                        </div>
+
+                        <div class="single-customer mb-100">
+                            <div class="what-img">
+                                <img src="{{ asset('front') }}/img/shape/man3.png" alt="">
+                            </div>
+                            <div class="what-cap">
+                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
+                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
+                            </div>
+                        </div>
+
+                        <div class="single-customer mb-100">
+                            <div class="what-img">
+                                <img src="{{ asset('front') }}/img/shape/man2.png" alt="">
+                            </div>
+                            <div class="what-cap">
+                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
+                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our Customer End -->
+<!-- Say Something Start -->
+<div class="say-something-aera pt-90 pb-90 fix">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="offset-xl-1 offset-lg-1 col-xl-5 col-lg-5">
+                <div class="say-something-cap">
+                    <h2>Hello, <br> This website is made by Neddy AP.</h2>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3">
+                <div class="say-btn">
+                    <a href="#" class="btn radius-btn">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- shape -->
+    <div class="say-shape">
+        <img src="{{ asset('front') }}/img/shape/say-shape-left.png" alt=""
+            class="say-shape1 rotateme d-none d-xl-block">
+        <img src="{{ asset('front') }}/img/shape/say-shape-right.png" alt="" class="say-shape2 d-none d-lg-block">
+    </div>
+</div>
+<!-- Say Something End -->
+
+<script>
+    $("button").click(function() {
+    $('html,body').animate({
+        scrollTop: $(".second").offset().top},
+        'slow');
+});
+</script>
+@endsection

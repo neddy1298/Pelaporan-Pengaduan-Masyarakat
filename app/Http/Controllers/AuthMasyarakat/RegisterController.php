@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\AuthMasyarakat;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Models\Masyarakat;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -22,14 +23,14 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -38,36 +39,60 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:masyarakat', ['except' => ['logoutMasyarakat']]);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function showRegisterForm()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return view('masyarakat.auth.register');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+
+     public function register(Request $request)
+     {
+        // $this->Validat::make($request, [
+        //     'nama' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:masyarakats'],
+        //     'telp' => ['required', 'max:13'],
+        //     'username' => ['required'],
+        //     'password' => ['required', 'string', 'min:8'],
+        //     'nik' => ['required', 'string', 'unique:masyarakats'],
+        // ]);
+        // Validate the form data
+
+        $this->validate($request, [
+            'nama'   => 'required|unique:masyarakats,nama',
+            'email'   => 'required|email|unique:masyarakats,email',
+            'telp'   => 'required|min:8|max:13',
+            'username'   => 'required',
+            'password' => 'required|min:6',
+            'nik' => 'required|unique:masyarakats,nik',
         ]);
+        $request->validate([
+            'nama'   => 'required|unique:masyarakats,nama',
+            'email'   => 'required|email|unique:masyarakats,email',
+            'telp'   => 'required',
+            'username'   => 'required',
+            'password' => 'required|min:6',
+            'nik' => 'required|unique:masyarakats,nik',
+        ]);
+
+        // $data = $request->all();
+
+        $user = Masyarakat::create([
+            'nama' => $request['nama'],
+            'email' => $request['email'],
+            'telp' => $request['telp'],
+            'username' => $request['username'],
+            'password' => Hash::make($request['password']),
+            'nik' => $request['nik'],
+            'active' => 1,
+        ]);
+        Alert::success('Success!', 'Registrasi berhasil');
+
+
+        Auth::login($user);
+        return redirect('/#pengaduan');
+
     }
 }

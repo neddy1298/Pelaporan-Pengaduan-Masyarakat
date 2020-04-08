@@ -17,7 +17,7 @@ class Masyarakat extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nik', 'nama', 'email', 'username', 'password', 'telp',
+        'nik', 'nama', 'email', 'username', 'password', 'telp', 'active',
     ];
 
     /**

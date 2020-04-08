@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Stisla</title>
+    <title>{{ $title }} | Aspirasi dan Pengaduan Masyarakat</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -45,12 +45,18 @@
     <script src="{{ asset('template') }}/js/stisla.js"></script>
 
     <!-- JS Libraies -->
+    <script src="{{ asset('template') }}/node_modules/cleave.js/dist/cleave.min.js"></script>
+    <script src="{{ asset('template') }}/node_modules/cleave.js/dist/addons/cleave-phone.id.js"></script>
+    <script src="{{ asset('template') }}/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('template') }}/js/scripts.js"></script>
     <script src="{{ asset('template') }}/js/custom.js"></script>
+    <script src="{{ asset('template') }}/js/page/modules-sweetalert.js"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('template') }}/js/page/forms-advanced-forms.js"></script>
+    @include('sweetalert::alert')
 </body>
 
 </html>
