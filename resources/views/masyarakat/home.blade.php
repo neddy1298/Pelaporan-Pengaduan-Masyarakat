@@ -14,10 +14,10 @@
                             </h1>
                             <p data-animation="fadeInUp" data-delay=".8s">Sampaikan laporan Anda langsung kepada
                                 instansi pemerintah berwenang
-                                <h6 data-animation="fadeInRight" data-delay="1.0s">
-                                    <a href="#tata-cara" class="text-info">Ketahi caranya!</a>
-                                </h6>
                             </p>
+                            <h6 data-animation="fadeInLeft" data-delay="1.0s">
+                                <a href="#tata-cara" class="text-info">Ketahi caranya!</a>
+                            </h6>
                             <!-- Slider btn -->
                             <div class="slider-btns">
                                 <!-- Hero-btn -->
@@ -51,11 +51,14 @@
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-6 col-md-9 ">
                         <div class="hero__caption">
-                            <h1 data-animation="fadeInUp" data-delay=".6s">Layanan Aspirasi dan Pengaduan Online
-                                Masyarakat
+                            <h1 data-animation="fadeInUp" data-delay=".6s">Sarana Interaktif Masyarakat dan Pemerintah
+                                Berbasis Media Sosial
                             </h1>
                             <p data-animation="fadeInUp" data-delay=".8s">Sampaikan laporan Anda langsung kepada
                                 instansi pemerintah berwenang
+                                <h6 data-animation="fadeInLeft" data-delay="1.0s">
+                                    <a href="#testimoni" class="text-info">Lihat Bukti Penanganan</a>
+                                </h6>
                                 <!-- Slider btn -->
                                 <div class="slider-btns">
                                     <!-- Hero-btn -->
@@ -270,7 +273,7 @@
 </section>
 <!-- Services Area End -->
 <!-- Our Customer Start -->
-<div class="our-customer section-padd-top30">
+<div class="our-customer section-padd-top30" id="testimoni">
     <div class="container-fluid">
         <div class="our-customer-wrapper">
             <!-- Section Tittle -->
@@ -291,9 +294,10 @@
                                 <img src="{{ asset('front') }}/img/shape/man1.png" alt="">
                             </div>
                             <div class="what-cap">
-                                <h4><a href="#">{{ $sample->nama }}</a></h4>
-                                <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip
-                                    ex ea commodo consequat duis aute irure dolor in represse.</p>
+                                <h4><a
+                                        href="{{ route('masyarakat.pengaduan.detail', $sample->id_pengaduan) }}">{{ $sample->nama }}</a>
+                                </h4>
+                                <p>{{ $sample->isi_laporan }}.</p>
                             </div>
                         </div>
                         @endforeach

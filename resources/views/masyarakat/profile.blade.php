@@ -1,164 +1,134 @@
-@extends('layouts.admin.app', ['page' => 'Admins', 'subpage' => 'Profile'])
+@extends('layouts.front.app', ['page' => 'User'])
 
 @section('content')
-<!-- Main Content -->
-<div class="main-content">
-    <section class="section">
-        <div class="section-body">
-            <h2 class="section-title">Hi, {{ Auth::user()->nama }}</h2>
-            <p class="section-lead">
-                Change information about yourself on this page.
-            </p>
 
-            <div class="row mt-sm-4">
-                <div class="col-12 col-md-12 col-lg-12">
-                    <div class="card profile-widget">
-                        <div class="profile-widget-header">
-                            <img alt="image" src="{{ asset('template') }}/img/avatar/avatar-1.png"
-                                class="rounded-circle profile-widget-picture" />
-                            <div class="profile-widget-items">
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Posts</div>
-                                    <div class="profile-widget-item-value">187</div>
-                                </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Followers</div>
-                                    <div class="profile-widget-item-value">6,8K</div>
-                                </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Following</div>
-                                    <div class="profile-widget-item-value">2,1K</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile-widget-description">
-                            <div class="profile-widget-name">
-                                {{ Auth::user()->nama_petugas }}
-                                <div class="text-muted d-inline font-weight-normal">
-                                    <div class="slash"></div>
-                                    {{ Auth::user()->level }}
-                                </div>
-                            </div>
-                            <div class="card-header">
-                                <h4>Edit Profile</h4>
-                            </div>
-                            <button class="btn btn-primary" onclick="disable()">Disable</button>
-                            <button class="btn btn-primary" onclick="enable()">Enable</button>
-                            <form method="POST" class="needs-validation" novalidate=""
-                                action="{{ route('petugas.update', Auth::user()->id_petugas ) }}">
-                                @csrf
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12 col-12">
-                                            <label>Nama</label>
-                                            <input type="text" class="form-control" name="nama_petugas"
-                                                value="{{ Auth::user()->nama_petugas }}" required="" id="form"
-                                                disabled />
-                                            <div class="invalid-feedback">
-                                                Please fill in the name
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-7 col-12">
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" value="{{ Auth::user()->email }}"
-                                                name="email" required="" id="form2" disabled />
-                                            <div class="invalid-feedback">
-                                                Please fill in the email
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-5 col-12">
-                                            <label>Phone</label>
-                                            <input type="tel" class="form-control" name="telp"
-                                                value="{{ Auth::user()->telp }}" id="form3" disabled />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-right">
-                                    <input type="submit" class="btn btn-primary" value="Save Changes" id="form4"
-                                        disabled>
-                                </div>
-                            </form>
+<!-- Slider Area Start-->
+<div class="services-area">
+    <div class="container">
+        <!-- Section-tittle -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-tittle text-center mb-80">
+                    <h2>User Profile​</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Slider Area End-->
 
-                            <div class="card-header">
-                                <h4>Dengerous Area</h4>
+<!-- ================ contact section start ================= -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row mb-80">
+            <div class="col-12">
+                <h2 class="contact-title">Edit Profile</h2>
+                <h6 class="mb-80">Change information about yourself on this page. </h6>
+            </div>
+            <div class="col-lg-8">
+                <form class="form-contact contact_form"
+                    action="{{ route('masyarakat.profile.update', Auth::user()->nik ) }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Nama</label>
+                                <input class="form-control valid" name="nama" id="nama" type="text"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
+                                    placeholder="Enter your name" value="{{ Auth::user()->nama }}" required>
                             </div>
-                            <button class="btn btn-primary" onclick="disable1()">Disable</button>
-                            <button class="btn btn-primary" onclick="enable1()">Enable</button>
-                            <form method="POST" class="needs-validation" novalidate=""
-                                action="{{ route('petugas.update2', Auth::user()->id_petugas ) }}">
-                                @csrf
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-6 col-6">
-                                            <label>Username</label>
-                                            <input type="text" class="form-control" name=Auth::user()name"
-                                                value="{{ Auth::user()-Auth::user()name }}" id="form5" disabled />
-                                            <div class="invalid-feedback">
-                                                Please fill in theAuth::user()name
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-6 col-6">
-                                            <label>Password</label>
-                                            <input type="password" class="form-control" name="password" value=""
-                                                id="form6" disabled />
-                                            <div class="invalid-feedback">
-                                                Please fill in the password
-                                            </div>
-                                        </div>
-                                        <div class="card-footer text-right">
-                                            <input type="submit" class="btn btn-primary" value="Save Changes" id="form7"
-                                                disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
-                        <div class="card-footer text-center">
-                            <div class="font-weight-bold mb-2">Follow {{ Auth::user()->nama_petugas }} On</div>
-                            <a href="#" class="btn btn-social-icon btn-facebook mr-1">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="btn btn-social-icon btn-twitter mr-1">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="btn btn-social-icon btn-github mr-1">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="btn btn-social-icon btn-instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input class="form-control valid" name="email" id="email" type="email"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
+                                    placeholder="Email" value="{{ Auth::user()->email }}" required>
+                            </div>
                         </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">No. Telp</label>
+                                <input class="form-control valid" name="telp" id="telp" type="text"
+                                    onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Enter your phone number'"
+                                    placeholder="Enter your phone number" value="{{ Auth::user()->telp }}" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="">NIK <small>(hubungi petugas untuk merubah)</small></label>
+                                <input class="form-control" name="nik" id="nik" type="text"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your NIK'"
+                                    placeholder="Enter your NIK" value="{{ Auth::user()->nik }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3 text-right">
+                        <input type="submit" class="btn-danger boxed-btn" value="Update">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 offset-lg-1">
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-home"></i></span>
+                    <div class="media-body">
+                        <h3>Buttonwood, California.</h3>
+                        <p>Rosemead, CA 91770</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                    <div class="media-body">
+                        <h3>+1 253 565 2365</h3>
+                        <p>Mon to Fri 9am to 6pm</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-email"></i></span>
+                    <div class="media-body">
+                        <h3>support@colorlib.com</h3>
+                        <p>Send us your query anytime!</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-</div>
 
-<script>
-    function disable() {
-    document.getElementById("form").disabled = true;
-    document.getElementById("form2").disabled = true;
-    document.getElementById("form3").disabled = true;
-    document.getElementById("form4").disabled = true;
-    }
-    function enable() {
-    document.getElementById("form").disabled = false;
-    document.getElementById("form2").disabled = false;
-    document.getElementById("form3").disabled = false;
-    document.getElementById("form4").disabled = false;
-    }
-    function disable1() {
-    document.getElementById("form5").disabled = true;
-    document.getElementById("form6").disabled = true;
-    document.getElementById("form7").disabled = true;
-    }
-    function enable1() {
-    document.getElementById("form5").disabled = false;
-    document.getElementById("form6").disabled = false;
-    document.getElementById("form7").disabled = false;
-    }
-</script>
+
+        <div class="row">
+            <div class="col-12">
+                <h2 class="contact-title">Danger Area</h2>
+                <h6 class="mb-80">Change information about yourself on this page. </h6>
+            </div>
+            <div class="col-lg-8">
+                <form class="form-contact contact_form"
+                    action="{{ route('masyarakat.profile.update', Auth::user()->nik ) }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Username</label>
+                                <input class="form-control valid" name="username" id="username" type="text"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your Username'"
+                                    placeholder="Enter your Username" value="{{ Auth::user()->username }}" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input class="form-control valid" name="password" id="password" type="password"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your password'"
+                                    placeholder="Enter your password" value="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="submit" class="btn-danger boxed-btn" value="Update">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ contact section end ================= -->
 @endsection

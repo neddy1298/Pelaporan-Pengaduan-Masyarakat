@@ -26,9 +26,10 @@
                                 <li><a href="{{ route('masyarakat.register') }}">Daftar</a></li>
                                 <li><a href="{{ route('masyarakat.login') }}">Masuk</a></li>
                                 @else
-                                <li><a href="#">Hi, {{ Auth::user()->nama }}</a>
+                                <li class="{{ ( $page == 'User') ? 'active' : '' }}"><a href="#">Hi,
+                                        {{ Auth::user()->nama }}</a>
                                     <ul class="submenu">
-                                        <li><a href="blog.html">Profile</a></li>
+                                        <li><a href="{{ route('masyarakat.profile') }}">Profile</a></li>
                                         <li class="mt-2"><a class="text-danger" {{ route('masyarakat.logout') }}"
                                                 onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();"><i

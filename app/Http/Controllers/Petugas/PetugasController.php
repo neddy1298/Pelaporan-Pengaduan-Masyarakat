@@ -5,10 +5,17 @@ namespace App\Http\Controllers\Petugas;
 use App\Models\Petugas;
 use App\Models\Tanggapan;
 use Auth;
+use Hash;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PetugasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:petugas');
+    }
+
     public function index()
     {
         $admins = Petugas::latest()->paginate('8');
@@ -34,22 +41,25 @@ class PetugasController extends Controller
 
     public function profile()
     {
-        $user = Auth::user()->get()->first();
-        return view('petugas.admin.profile', compact('user'));
-    }
-
-    public function update(Request $request)
-    {
-
-        // $user = Petugas::find($id);
-        // return $user;
-        // Alert::success('Success!', 'Berhasil merubah profile');
-        // return view('petugas.admin.profile');
-        // return redirect()->back();
-    }
-
-    public function update2(Request $request, $id)
-    {
         return view('petugas.admin.profile');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $admin = Petugas::where('id_petugas', $id)->get()->first();
+
+        if($request->password)
+        {
+            $admin->update([
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+                ]);
+        }else
+        {
+            $admin->update($request->all());
+        }
+        Alert::success('Success!', 'Berhasil mengubah data');
+        return redirect()->back();
+
     }
 }

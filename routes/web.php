@@ -28,8 +28,11 @@ Route::post('/password/reset', 'AuthMasyarakat\ResetPasswordController@reset');
 
 
 Route::get('/', 'Masyarakat\HomeController@index')->name('masyarakat.dashboard');
-// Soon
-Route::get('/profile', 'Masyarakat\ProfileController@index')->name('masyarakat.profile');
+
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', 'Masyarakat\ProfileController@index')->name('masyarakat.profile');
+    Route::post('/update/{nik}', 'Masyarakat\ProfileController@update')->name('masyarakat.profile.update');
+});
 
 Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', 'Masyarakat\PengaduanController@index')->name('masyarakat.pengaduan.user')->middleware('auth:masyarakat');
@@ -87,7 +90,6 @@ Route::prefix('admin')->group(function() {
     // Profile
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', 'Petugas\PetugasController@profile')->name('petugas.profile');
-        Route::post('/update/{$id}', 'Petugas\PetugasController@update')->name('petugas.update');
-        Route::post('/update2/{$id}', 'Petugas\PetugasController@update2')->name('petugas.update2');
+        Route::post('/update/{id}', 'Petugas\PetugasController@update')->name('petugas.update');
     });
 }) ;

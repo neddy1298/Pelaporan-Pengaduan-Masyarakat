@@ -21,11 +21,11 @@
                         <div class="footer-tittle">
                             <h4>Quick Links</h4>
                             <ul>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Pricing</a></li>
-                                <li><a href="#">Download</a></li>
-                                <li><a href="#">Reviews</a></li>
+                                <li><a>About</a></li>
+                                <li><a>Features</a></li>
+                                <li><a>Pricing</a></li>
+                                <li><a>Download</a></li>
+                                <li><a>Reviews</a></li>
                             </ul>
                         </div>
                     </div>
@@ -35,11 +35,11 @@
                         <div class="footer-tittle">
                             <h4>Support</h4>
                             <ul>
-                                <li><a href="#">Report a bug</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Sitemap</a></li>
-                                <li><a href="#">FAQs</a></li>
+                                <li><a>Report a bug</a></li>
+                                <li><a>Privacy Policy</a></li>
+                                <li><a>Terms & Conditions</a></li>
+                                <li><a>Sitemap</a></li>
+                                <li><a>FAQs</a></li>
                             </ul>
                         </div>
                     </div>
