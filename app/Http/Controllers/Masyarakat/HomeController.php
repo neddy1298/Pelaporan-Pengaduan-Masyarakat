@@ -15,9 +15,4 @@ class HomeController extends Controller
         ->where('status', 'selesai')->latest()->take(5)->get();
         return view('masyarakat.home', compact('samples'));
     }
-
-    public function pengaduan()
-    {
-        return view('masyarakat.home');
-    }
 }

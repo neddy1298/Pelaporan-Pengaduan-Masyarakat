@@ -20,15 +20,15 @@
             <h4 class="widget_title">Category</h4>
             <ul class="list cat-list">
                 <li>
-                    <a href="#" class="d-flex">
+                    <a href="{{ route('masyarakat.pengaduan.user') }}" class="d-flex">
                         <p>Pengaduan Kamu</p>
-                        <p> ( {{ $countKu->count() }} )</p>
+                        <p> ({{ $countKu->count() }})</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="d-flex">
+                    <a href="{{ route('masyarakat.pengaduan') }}" class="d-flex">
                         <p>Pengaduan Semua Orang</p>
-                        <p> ( {{$countSem->count() }} )</p>
+                        <p> ({{$countSem->count() }})</p>
                     </a>
                 </li>
             </ul>
@@ -36,11 +36,11 @@
 
         <aside class="single_sidebar_widget popular_post_widget">
             <h3 class="widget_title">Pengaduan Terbaru</h3>
-            @foreach ($countSem as $count)
+            @foreach ($countSem->take(4) as $count)
             <div class="media post_item">
                 <img src="{{ asset('asset') }}/pengaduan/{{ $count->foto }}" alt="post" width="40%">
                 <div class="media-body">
-                    <a href="single-blog.html">
+                    <a href="{{ route( 'masyarakat.pengaduan.detail', $count->id_pengaduan) }}">
                         <h3>{{$count->judul }}</h3>
                     </a>
                     <p>{{ $count->tgl_pengaduan->format('d M, Y') }}</p>

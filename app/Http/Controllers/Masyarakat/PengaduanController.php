@@ -10,6 +10,10 @@ use Auth;
 use File;
 class PengaduanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:masyarakat');
+    }
 
     public function index()
     {
@@ -19,7 +23,7 @@ class PengaduanController extends Controller
         ->latest('tgl_pengaduan')
         ->paginate(4);
 
-        $countSem = Pengaduan::latest()->take(4)->get();
+        $countSem = Pengaduan::latest()->get();
         $countKu = $pengaduans;
 
         return view('masyarakat.pengaduan.user', compact('pengaduans', 'countKu', 'countSem'));
@@ -34,7 +38,7 @@ class PengaduanController extends Controller
         ->paginate(5);
 
         $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
-        $countSem = Pengaduan::latest()->take(4)->get();
+        $countSem = Pengaduan::latest()->get();
 
         return view('masyarakat.pengaduan.semua', compact('pengaduans', 'countKu', 'countSem'));
     }
@@ -52,7 +56,7 @@ class PengaduanController extends Controller
         ->get();
 
         $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
-        $countSem = Pengaduan::latest()->take(4)->get();
+        $countSem = Pengaduan::latest()->get();
         $prev = Pengaduan::where('status', 'selesai')->where('id_pengaduan', '<', $id)->max('id_pengaduan');
         $prevContent = Pengaduan::where('id_pengaduan', $prev)->get()->first();
         $next = Pengaduan::where('status', 'selesai')->where('id_pengaduan', '>', $id)->min('id_pengaduan');
@@ -84,8 +88,9 @@ class PengaduanController extends Controller
         Pengaduan::create([
             'tgl_pengaduan' => now()->format('Y-m-d'),
             'nik' => Auth::user()->nik,
+            'judul' => $request->judul,
             'isi_laporan' => $request->isi_laporan,
-            'foto' => $request->foto,
+            'foto' => $namaFile,
         ]);
         Alert::success('Success!', 'Berhasil membuat laporan');
         return redirect()->route('masyarakat.pengaduan');

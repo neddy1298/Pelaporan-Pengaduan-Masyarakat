@@ -6,7 +6,7 @@
                     <div class="single-footer-caption mb-30">
                         <!-- logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="{{ asset('front') }}/img/logo/logo2_footer.png" alt=""></a>
+                            <a><img src="{{ asset('front') }}/img/logo/logo2_footer.jpg" alt="" width="50%"></a>
                         </div>
                         <div class="footer-tittle">
                             <div class="footer-pera">
@@ -21,11 +21,14 @@
                         <div class="footer-tittle">
                             <h4>Quick Links</h4>
                             <ul>
-                                <li><a>About</a></li>
-                                <li><a>Features</a></li>
-                                <li><a>Pricing</a></li>
-                                <li><a>Download</a></li>
-                                <li><a>Reviews</a></li>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#pengaduan">Tulis Pengaduan</a></li>
+                                <li><a href="{{ route('masyarakat.pengaduan') }}" target="_blank">Pengaduan Semua
+                                        Orang</a></li>
+                                <li><a href="{{ route('masyarakat.pengaduan.user') }}" target="_blank">Pengaduan
+                                        Kamu</a></li>
+                                <li><a href="{{ route('masyarakat.profile') }}" target="_blank">Profile</a></li>
+
                             </ul>
                         </div>
                     </div>

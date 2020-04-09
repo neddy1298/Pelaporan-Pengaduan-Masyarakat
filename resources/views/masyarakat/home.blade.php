@@ -126,7 +126,14 @@
                         <form action="{{ route('masyarakat.pengaduan.submit') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
-                            <div class="mt-10 mb-5">
+                            <div class="mt-10 mb-5 text-left">
+                                <label for="judul">Judul</label>
+                                <input class="form-control w-100" type="text" name="judul" id="judul"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Judul'"
+                                    placeholder=" Enter Judul" required>
+                            </div>
+                            <div class="mt-10 mb-5 text-left">
+                                <label for="message">Isi Laporan</label>
                                 <textarea class="single-textarea form-control w-100" name="isi_laporan" id="message"
                                     cols="30" rows="9" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message"
