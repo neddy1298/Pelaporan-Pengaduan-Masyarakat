@@ -31,12 +31,13 @@
                         </h2>
                         <ul class="blog-info-link mt-3 mb-4">
                             <li><a><i class="fa fa-user"></i> {{ $pengaduan->nama }}</a></li>
-                            <li><a><i class="fa fa-comments"></i> {{ $tanggapans->count() }} Tanggapan</a></li>
                             @if ($pengaduan->status == '0')
                             <li><a class="text-danger">Belum di Konfirmasi</a></li>
                             @elseif ($pengaduan->status == 'proses')
+                            <li><a><i class="fa fa-comments"></i> {{ $tanggapans->count() }} Tanggapan</a></li>
                             <li><a class="text-warning">Dalam Proses</a></li>
                             @elseif ($pengaduan->status == 'selesai')
+                            <li><a><i class="fa fa-comments"></i> {{ $tanggapans->count() }} Tanggapan</a></li>
                             <li><a class="text-success">Selesai di Tanggapi</a></li>
                             @endif
                         </ul>
@@ -126,6 +127,11 @@
                         </div>
                     </div>
                 </div>
+                @if ($pengaduan->status == '0')
+                <div class="comments-area">
+                    <h4 class="text-danger">Tanggapan Belum di Konfirmasi</h4>
+                </div>
+                @else
                 <div class="comments-area">
                     <h4>{{ $tanggapans->count() }} Tanggapan</h4>
                     @foreach ($tanggapans as $tanggapan)
@@ -156,6 +162,8 @@
                     </div>
                     @endforeach
                 </div>
+                @endif
+                @if ($pengaduan->status == 'proses')
                 <div class="comment-form">
                     <h4>Leave a Reply</h4>
                     <form class="form-contact comment_form" action="#" id="commentForm">
@@ -190,6 +198,7 @@
                         </div>
                     </form>
                 </div>
+                @endif
             </div>
             @include('layouts.front.pengaduan')
         </div>
