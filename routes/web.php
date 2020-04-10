@@ -64,6 +64,11 @@ Route::prefix('admin')->group(function() {
         Route::post('/search', 'Petugas\PengaduanController@search')->name('petugas.pengaduan.search');
     });
 
+    // PDF
+    Route::group(['prefix' => 'report'], function () {
+        Route::get('/', 'Petugas\PengaduanController@report')->name('petugas.report');
+    });
+
     // Tanggapan
     Route::group(['prefix' => 'tanggapan'], function () {
         Route::get('/', 'Petugas\TanggapanController@index')->name('petugas.tanggapan');
@@ -93,3 +98,4 @@ Route::prefix('admin')->group(function() {
         Route::post('/update/{id}', 'Petugas\PetugasController@update')->name('petugas.update');
     });
 }) ;
+

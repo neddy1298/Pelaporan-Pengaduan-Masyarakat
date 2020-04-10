@@ -12,7 +12,7 @@ $factory->define(Tanggapan::class, function (Faker $faker) {
     $petugas = Petugas::pluck('id_petugas')->toArray();
     return [
         'id_pengaduan' => $faker->randomElement($pengaduan),
-        'tgl_tanggapan' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'tgl_tanggapan' => $faker->dateTimeThisDecade($max = 'now', $timezone = null),
         'tanggapan' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'id_petugas' => $faker->randomElement($petugas),
     ];

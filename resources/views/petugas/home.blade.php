@@ -137,7 +137,8 @@
                     <div class="card-header">
                         <h4>Laporan Pengaduan Belum di Verifikasi</h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                            <a href="{{ route('petugas.pengaduan.custome', '0') }}" class="btn btn-danger">View More <i
+                                    class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -159,7 +160,8 @@
                                     </td>
                                     <td>{{ Carbon\Carbon::parse($tanggapan->tgl_pengaduan)->format('d M Y') }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary">Detail</a>
+                                        <a href="{{ route('petugas.pengaduan.detail', $tanggapan->id_pengaduan) }}"
+                                            class="btn btn-primary">Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -193,7 +195,7 @@
                             @endforeach
                         </ul>
                         <div class="text-center pt-1 pb-1">
-                            <a href="#" class="btn btn-primary btn-lg btn-round">
+                            <a href="{{ route('petugas.pengaduan') }}" class="btn btn-primary btn-lg btn-round">
                                 View All
                             </a>
                         </div>
@@ -234,7 +236,8 @@
                                     </td>
                                     <td>{{ Carbon\Carbon::parse($tanggapan->tgl_pengaduan)->format('d M Y') }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary">Detail</a>
+                                        <a href="{{ route('petugas.pengaduan.detail', $tanggapan->id_pengaduan) }}"
+                                            class="btn btn-primary">Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -269,7 +272,8 @@
                                 </div>
                             </a>
                             @endforeach
-                            <a href="features-tickets.html" class="ticket-item ticket-more">
+                            <a href="{{ route('petugas.pengaduan.custome', 'proses') }}"
+                                class="ticket-item ticket-more">
                                 View All <i class="fas fa-chevron-right"></i>
                             </a>
                         </div>

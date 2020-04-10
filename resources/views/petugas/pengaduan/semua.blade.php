@@ -18,7 +18,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Laporan Pengaduan</h4>
+                            <h4>Laporan Pengaduan <a class="btn btn-primary ml-3" href="{{ route('petugas.report') }}"
+                                    target="_blank">Export PDF</a></h4>
                             <div class="card-header-form">
                                 <form action="{{ route('petugas.pengaduan.search') }}" method="POST">
                                     @csrf

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Petugas;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
+use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PengaduanController extends Controller
@@ -76,5 +77,20 @@ class PengaduanController extends Controller
     public function destroy(Pengaduan $pengaduan)
     {
         //
+    }
+
+    public function report()
+    {
+        $datas = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
+        ->select('pengaduans.*', 'masyarakats.nama')
+        ->whereMonth('tgl_pengaduan', now()->month)
+        ->whereYear('tgl_pengaduan', now()->year)->latest()->get();
+
+        $tanggapan = Tanggapan::get();
+        // return view('petugas.report.report', compact('datas', 'tanggapan'));
+
+        $pdf = PDF::loadview('petugas.report.report', compact('datas', 'tanggapan'));
+        return $pdf->download('Laporan_Pengaduan_'.now()->format('d-m-Y'));
+        // return $pdf->stream();
     }
 }
