@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -24,17 +25,18 @@ class LoginController extends Controller
       // Validate the form data
       $this->validate($request, [
         'email'   => 'required|email',
-        'password' => 'required|min:6'
+        'password' => 'required|min:6',
       ]);
 
       $credentials = [
         'email' => $request->email,
-        'password' => $request->password
+        'password' => $request->password,
     ];
 
       // Attempt to log the user in
       if (Auth::guard('masyarakat')->attempt($credentials, $request->remember)) {
         // if successful, then redirect to their intended location
+        Alert::success('Success!', 'Login berhasil!');
         return redirect()->intended(route('masyarakat.dashboard'));
       }
       // if unsuccessful, then redirect back to the login with the form data
@@ -44,6 +46,6 @@ class LoginController extends Controller
     public function logoutMasyarakat()
     {
         Auth::guard('masyarakat')->logout();
-        return redirect('/masyarakat');
+        return redirect('/');
     }
 }

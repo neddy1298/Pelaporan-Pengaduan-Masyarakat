@@ -17,7 +17,7 @@ class Masyarakat extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nik', 'nama', 'email', 'username', 'password', 'telp',
+        'nik', 'nama', 'email', 'username', 'password', 'telp', 'active',
     ];
 
     /**
@@ -28,6 +28,11 @@ class Masyarakat extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function pengaduan()
+    {
+        return $this->hasMany('App\Models\Pengaduan');
+    }
 
     public function sendPasswordResetNotification($token)
     {

@@ -30,6 +30,12 @@ class Petugas extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tanggapan()
+    {
+        return $this->hasMany('App\Models\Tanggapan');
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PetugasResetPasswordNotification($token));

@@ -24,10 +24,10 @@ class RedirectIfAuthenticated
                 return redirect()->route('petugas.dashboard');
             }
 
-        case 'masyarakat':
-            if (Auth::guard($guard)->check()) {
-                return redirect()->route('masyarakat.dashboard');
-            }
+        // case 'masyarakat':
+        //     if (Auth::guard($guard)->check()) {
+        //         return redirect()->route('masyarakat.dashboard');
+        //     }
 
         default:
             if (Auth::guard($guard)->check()) {

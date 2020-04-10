@@ -18,6 +18,7 @@ class MasyarakatSeeder extends Seeder
             'username' => 'neddy',
             'password' => bcrypt('admin1298'),
             'telp' => '082125241014',
+            'active' => 0,
         ];
         DB::table('masyarakats')->insert($masyarakat);
 
