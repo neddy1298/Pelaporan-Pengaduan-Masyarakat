@@ -29,6 +29,27 @@ class PengaduanController extends Controller
         return view('masyarakat.pengaduan.user', compact('pengaduans', 'countKu', 'countSem'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
+        ->select('pengaduans.*','masyarakats.nama')
+        ->where('pengaduans.nik','like',"%".$search."%")
+        ->where('status', 'selesai')
+        ->orWhere('masyarakats.nama','like',"%".$search."%")
+        ->where('status', 'selesai')
+        ->orWhere('pengaduans.judul','like',"%".$search."%")
+        ->where('status', 'selesai')
+        ->paginate(5);
+
+        $countSem = Pengaduan::latest()->get();
+        $countKu = $pengaduans;
+
+        Alert::success('Success!', 'Berhasil mencari data');
+        return view('masyarakat.pengaduan.user', compact('pengaduans', 'countKu', 'countSem'));
+    }
+
     public function index2()
     {
         $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')

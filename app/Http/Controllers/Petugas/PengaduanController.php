@@ -46,7 +46,7 @@ class PengaduanController extends Controller
         ->select('pengaduans.*','masyarakats.nama')
         ->where('pengaduans.nik','like',"%".$search."%")
         ->orWhere('masyarakats.nama','like',"%".$search."%")
-        ->orWhere('pengaduans.isi_laporan','like',"%".$search."%")
+        ->orWhere('pengaduans.judul','like',"%".$search."%")
         ->paginate(8);
 
         return view('petugas.pengaduan.search', compact('pengaduans', 'search'));
@@ -90,7 +90,28 @@ class PengaduanController extends Controller
         // return view('petugas.report.report', compact('datas', 'tanggapan'));
 
         $pdf = PDF::loadview('petugas.report.report', compact('datas', 'tanggapan'));
+
+        if ($datas->count() == 1)
+        {
+            $datas = $datas->first();
+            return $pdf->download('Laporan_Pengaduan_'.$datas->id_pengaduan.now()->format('d-m-Y'));
+        }
         return $pdf->download('Laporan_Pengaduan_'.now()->format('d-m-Y'));
         // return $pdf->stream();
+    }
+
+    public function reportSatu($id)
+    {
+        $datas = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
+        ->select('pengaduans.*', 'masyarakats.nama')
+        ->where('id_pengaduan', $id)->get();
+
+        $tanggapan = Tanggapan::get();
+        // return view('petugas.report.report', compact('datas', 'tanggapan'));
+
+        $pdf = PDF::loadview('petugas.report.report', compact('datas', 'tanggapan'));
+        return $pdf->download('Laporan_Pengaduan_'.$datas->id_pengaduan.now()->format('d-m-Y'));
+
+        return $pdf->stream();
     }
 }

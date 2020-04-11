@@ -121,9 +121,7 @@
                             <a>
                                 <h4>{{ $pengaduan->nama }}</h4>
                             </a>
-                            <p>Second divided from form fish beast made. Every of seas all gathered use saying you're,
-                                he
-                                our dominion twon Second divided from</p>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum eaque sit aliquid quod recusandae voluptas ipsam ratione, ex quas? Itaque error rerum architecto nisi animi culpa quasi voluptatum laborum at.</p>
                         </div>
                     </div>
                 </div>

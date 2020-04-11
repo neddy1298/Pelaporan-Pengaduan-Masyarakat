@@ -20,6 +20,10 @@
                         <div class="card-header">
                             <h4>Laporan Pengaduan</h4>
                             <div class="card-header-form">
+                                <a class="btn btn-primary ml-3"
+                                    href="{{ route('petugas.report.satu', $pengaduan->id_pengaduan) }}"
+                                    target="_blank">Export
+                                    PDF</a>
                                 @if ($pengaduan->status == '0')
                                 <button class="btn btn-warning" data-toggle="modal"
                                     data-target="#konfirmasi">Konfirmasi</button>

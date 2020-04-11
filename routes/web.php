@@ -39,6 +39,7 @@ Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/all', 'Masyarakat\PengaduanController@index2')->name('masyarakat.pengaduan');
     Route::get('/{id}', 'Masyarakat\PengaduanController@detail')->name('masyarakat.pengaduan.detail');
     Route::post('/submit', 'Masyarakat\PengaduanController@post')->name('masyarakat.pengaduan.submit');
+    Route::post('/search', 'Masyarakat\PengaduanController@search')->name('masyarakat.pengaduan.search');
 
 });
 
@@ -67,6 +68,7 @@ Route::prefix('admin')->group(function() {
     // PDF
     Route::group(['prefix' => 'report'], function () {
         Route::get('/', 'Petugas\PengaduanController@report')->name('petugas.report');
+        Route::get('/{id}', 'Petugas\PengaduanController@reportSatu')->name('petugas.report.satu');
     });
 
     // Tanggapan
