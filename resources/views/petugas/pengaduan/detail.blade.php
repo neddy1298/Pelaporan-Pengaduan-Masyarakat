@@ -54,7 +54,7 @@
                                     <p>{{ $pengaduan->isi_laporan }}</p>
                                     <div class="gallery col-md-2">
                                         <div class="gallery-item"
-                                            data-image="{{ asset('template') }}/img/unsplash/andre-benz-1214056-unsplash.jpg"
+                                        data-image="{{ asset('asset') }}/pengaduan/{{ $pengaduan->foto }}"
                                             data-title="Image 8">
                                         </div>
                                     </div>

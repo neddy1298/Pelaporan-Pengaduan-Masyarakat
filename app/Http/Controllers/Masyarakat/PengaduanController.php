@@ -103,6 +103,10 @@ class PengaduanController extends Controller
 
     public function post(Request $request)
     {
+        $this->validate($request, [
+            'foto' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $foto = $request->file('foto');
         $namaFile = \Carbon\Carbon::now()->timestamp . '_' . uniqid() . '.' . $foto->getClientOriginalExtension();
         $foto->move(public_path('asset/pengaduan/'),$namaFile);

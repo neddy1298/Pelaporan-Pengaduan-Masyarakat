@@ -51,7 +51,7 @@
                                         <td>
                                             <div class="gallery">
                                                 <div class="gallery-item"
-                                                    data-image="{{ asset('template') }}/img/unsplash/andre-benz-1214056-unsplash.jpg"
+                                                data-image="{{ asset('asset') }}/pengaduan/{{ $pengaduan->foto }}"
                                                     data-title="Image 8">
                                                 </div>
                                             </div>
