@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
 use File;
+
 class PengaduanController extends Controller
 {
     public function __construct()
@@ -18,13 +19,13 @@ class PengaduanController extends Controller
     public function index()
     {
         $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
-        ->select('pengaduans.*', 'masyarakats.nama')
-        ->where('pengaduans.nik', Auth::user()->nik)
-        ->latest('tgl_pengaduan')
-        ->paginate(4);
+            ->select('pengaduans.*', 'masyarakats.nama')
+            ->where('pengaduans.nik', Auth::user()->nik)
+            ->latest('created_at')
+            ->paginate(4);
 
+        $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
         $countSem = Pengaduan::latest()->get();
-        $countKu = $pengaduans;
 
         return view('masyarakat.pengaduan.user', compact('pengaduans', 'countKu', 'countSem'));
     }
@@ -33,18 +34,19 @@ class PengaduanController extends Controller
     {
         $search = $request->search;
 
-        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
-        ->select('pengaduans.*','masyarakats.nama')
-        ->where('pengaduans.nik','like',"%".$search."%")
-        ->where('status', 'selesai')
-        ->orWhere('masyarakats.nama','like',"%".$search."%")
-        ->where('status', 'selesai')
-        ->orWhere('pengaduans.judul','like',"%".$search."%")
-        ->where('status', 'selesai')
-        ->paginate(5);
+        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
+            ->select('pengaduans.*', 'masyarakats.nama')
+            ->where('pengaduans.nik', 'like', "%" . $search . "%")
+            ->where('status', 'selesai')
+            ->orWhere('masyarakats.nama', 'like', "%" . $search . "%")
+            ->where('status', 'selesai')
+            ->orWhere('pengaduans.judul', 'like', "%" . $search . "%")
+            ->where('status', 'selesai')
+            ->latest('created_at')
+            ->paginate(5);
 
+        $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
         $countSem = Pengaduan::latest()->get();
-        $countKu = $pengaduans;
 
         Alert::success('Success!', 'Berhasil mencari data');
         return view('masyarakat.pengaduan.user', compact('pengaduans', 'countKu', 'countSem'));
@@ -52,11 +54,11 @@ class PengaduanController extends Controller
 
     public function index2()
     {
-        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
-        ->select('pengaduans.*','masyarakats.nama')
-        ->where('status', 'selesai')
-        ->latest('tgl_pengaduan')
-        ->paginate(5);
+        $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
+            ->select('pengaduans.*', 'masyarakats.nama')
+            ->where('pengaduans.nik', '!=' , Auth::user()->nik)
+            ->latest('created_at')
+            ->paginate(5);
 
         $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
         $countSem = Pengaduan::latest()->get();
@@ -66,15 +68,15 @@ class PengaduanController extends Controller
 
     public function detail($id)
     {
-        $pengaduan = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
-        ->select('pengaduans.*','masyarakats.nama')
-        ->where('id_pengaduan', $id)
-        ->get()->first();
+        $pengaduan = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
+            ->select('pengaduans.*', 'masyarakats.nama')
+            ->where('id_pengaduan', $id)
+            ->get()->first();
 
         $tanggapans = Tanggapan::join('petugas', 'petugas.id_petugas', '=', 'tanggapans.id_petugas')
-        ->select('tanggapans.*','petugas.nama_petugas')
-        ->where('tanggapans.id_pengaduan', $id)
-        ->get();
+            ->select('tanggapans.*', 'petugas.nama_petugas')
+            ->where('tanggapans.id_pengaduan', $id)
+            ->get();
 
         $countKu = Pengaduan::where('pengaduans.nik', Auth::user()->nik)->get();
         $countSem = Pengaduan::latest()->get();
@@ -89,11 +91,11 @@ class PengaduanController extends Controller
 
     public function pengaduan()
     {
-        $pengaduan = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
-        ->select('pengaduans.*','masyarakats.nama')
-        ->where('status', 'proses|selesai')
-        ->andWhere('masyarakats.nik', Auth::user()->nik)
-        ->get();
+        $pengaduan = Pengaduan::join('masyarakats', 'masyarakats.nik', '=', 'pengaduans.nik')
+            ->select('pengaduans.*', 'masyarakats.nama')
+            ->where('status', 'proses|selesai')
+            ->andWhere('masyarakats.nik', Auth::user()->nik)
+            ->get();
         // $tanggapans = Tanggapan::join('petugas', 'petugas.id_petugas', '=', 'tanggapans.id_petugas')
         // ->select('tanggapans.*','petugas.nama_petugas')
         // ->where('tanggapans.id_pengaduan')
@@ -109,7 +111,7 @@ class PengaduanController extends Controller
 
         $foto = $request->file('foto');
         $namaFile = \Carbon\Carbon::now()->timestamp . '_' . uniqid() . '.' . $foto->getClientOriginalExtension();
-        $foto->move(public_path('asset/pengaduan/'),$namaFile);
+        $foto->move(public_path('asset/pengaduan/'), $namaFile);
         Pengaduan::create([
             'tgl_pengaduan' => now()->format('Y-m-d'),
             'nik' => Auth::user()->nik,
@@ -118,7 +120,7 @@ class PengaduanController extends Controller
             'foto' => $namaFile,
         ]);
         Alert::success('Success!', 'Berhasil membuat laporan');
-        return redirect()->route('masyarakat.pengaduan');
+        return redirect()->route('masyarakat.pengaduan.user');
     }
 
     public function profile()

@@ -56,7 +56,7 @@
                         <div class="card-stats-items">
                             <div class="card-stats-item">
                                 <div class="card-stats-item-count">
-                                    {{ $pengaduans->where('created_at', today())->count() }}</div>
+                                    {{ $tanggapans->where('created_at', today())->count() }}</div>
                                 <div class="card-stats-item-label">Tanggapan Baru</div>
                             </div>
                             <div class="card-stats-item">
@@ -151,16 +151,16 @@
                                     <th>Tanggal</th>
                                     <th>Action</th>
                                 </tr>
-                                @foreach ($tanggapans->where('status', '0')->take('7') as $tanggapan)
+                                @foreach ($pengaduans->where('status', '0')->take('7') as $pengaduan)
                                 <tr>
-                                    <td><a href="#">{{ $tanggapan->nik }}</a></td>
-                                    <td class="font-weight-600">{{ $tanggapan->nama }}</td>
+                                    <td><a href="#">{{ $pengaduan->nik }}</a></td>
+                                    <td class="font-weight-600">{{ $pengaduan->nama }}</td>
                                     <td>
                                         <div class="badge badge-danger">Menunggu Verifikasi</div>
                                     </td>
-                                    <td>{{ Carbon\Carbon::parse($tanggapan->tgl_pengaduan)->format('d M Y') }}</td>
+                                    <td>{{ Carbon\Carbon::parse($pengaduan->tgl_pengaduan)->format('d M Y') }}</td>
                                     <td>
-                                        <a href="{{ route('petugas.pengaduan.detail', $tanggapan->id_pengaduan) }}"
+                                        <a href="{{ route('petugas.pengaduan.detail', $pengaduan->id_pengaduan) }}"
                                             class="btn btn-primary">Detail</a>
                                     </td>
                                 </tr>
@@ -220,23 +220,23 @@
                                     <th>NIK</th>
                                     <th>Nama</th>
                                     <th>Status</th>
-                                    <th>Ditanggapi Oleh</th>
-                                    <th>Tanggal</th>
+                                    <th>Tanggal Pengaduan</th>
+                                    <th>Tanggal Selesai</th>
                                     <th>Action</th>
                                 </tr>
-                                @foreach ($tanggapans->take('7') as $tanggapan)
+                                @foreach ($pengaduans->where('status', 'selesai')->take('7') as $pengaduan)
                                 <tr>
-                                    <td><a href="#">{{ $tanggapan->nik }}</a></td>
-                                    <td class="font-weight-600">{{ $tanggapan->nama }}</td>
+                                    <td><a href="#">{{ $pengaduan->nik }}</a></td>
+                                    <td class="font-weight-600">{{ $pengaduan->nama }}</td>
                                     <td>
                                         <div class="badge badge-success">Selesai</div>
                                     </td>
+                                    <td>{{ Carbon\Carbon::parse($pengaduan->tgl_pengaduan)->format('d M Y') }}</td>
                                     <td>
-                                        {{ $tanggapan->nama_petugas }}
+                                        {{ Carbon\Carbon::parse($pengaduan->updated_at)->format('d M Y') }}
                                     </td>
-                                    <td>{{ Carbon\Carbon::parse($tanggapan->tgl_pengaduan)->format('d M Y') }}</td>
                                     <td>
-                                        <a href="{{ route('petugas.pengaduan.detail', $tanggapan->id_pengaduan) }}"
+                                        <a href="{{ route('petugas.pengaduan.detail', $pengaduan->id_pengaduan) }}"
                                             class="btn btn-primary">Detail</a>
                                     </td>
                                 </tr>
@@ -261,7 +261,7 @@
                     <div class="card-body p-0">
                         <div class="tickets-list">
                             @foreach ($pengaduans->where('status', 'proses')->take(4) as $pengaduan)
-                            <a href="#" class="ticket-item">
+                            <a href="{{ route('petugas.pengaduan.detail', $pengaduan->id_pengaduan) }}" class="ticket-item">
                                 <div class="ticket-title">
                                     <h4>{!! substr($pengaduan->isi_laporan, 0,25) !!}...</h4>
                                 </div>

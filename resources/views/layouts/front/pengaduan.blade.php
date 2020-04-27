@@ -37,7 +37,7 @@
 
         <aside class="single_sidebar_widget popular_post_widget">
             <h3 class="widget_title">Pengaduan Terbaru</h3>
-            @foreach ($countSem->take(4) as $count)
+            @foreach ($countSem->where('nik', '!=', Auth::user()->nik)->take(4) as $count)
             <div class="media post_item">
                 <img src="{{ asset('asset') }}/pengaduan/{{ $count->foto }}" alt="post" width="40%">
                 <div class="media-body">
@@ -47,6 +47,20 @@
                     <p>{{ $count->tgl_pengaduan->format('d M, Y') }}</p>
                 </div>
             </div>
+            @endforeach
+        </aside>
+        <aside class="single_sidebar_widget popular_post_widget">
+            <h3 class="widget_title">Pengaduan Terbaru Kamu</h3>
+            @foreach ($countSem->where('nik', Auth::user()->nik)->take(4) as $count)
+                <div class="media post_item">
+                    <img src="{{ asset('asset') }}/pengaduan/{{ $count->foto }}" alt="post" width="40%">
+                    <div class="media-body">
+                        <a href="{{ route( 'masyarakat.pengaduan.detail', $count->id_pengaduan) }}">
+                            <h3>{{$count->judul }}</h3>
+                        </a>
+                        <p>{{ $count->tgl_pengaduan->format('d M, Y') }}</p>
+                    </div>
+                </div>
             @endforeach
         </aside>
         <aside class="single_sidebar_widget tag_cloud_widget">

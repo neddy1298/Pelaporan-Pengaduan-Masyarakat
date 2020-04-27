@@ -24,14 +24,14 @@ class PengaduanController extends Controller
     public function index()
     {
         $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
-        ->select('pengaduans.*','masyarakats.nama')->latest('tgl_pengaduan')->paginate(8);
+        ->select('pengaduans.*','masyarakats.nama')->latest('created_at')->paginate(8);
         return view('petugas.pengaduan.semua', compact('pengaduans'));
     }
 
     public function index2($custome)
     {
         $pengaduans = Pengaduan::join('masyarakats', 'masyarakats.nik' ,'=','pengaduans.nik')
-        ->select('pengaduans.*','masyarakats.nama')->latest('tgl_pengaduan')
+        ->select('pengaduans.*','masyarakats.nama')->latest('created_at')
         ->where('pengaduans.status', $custome)->paginate(8);
         $custome = $custome;
         return view('petugas.pengaduan.custome', compact('pengaduans', 'custome'));
