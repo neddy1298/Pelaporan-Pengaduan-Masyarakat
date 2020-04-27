@@ -1,12 +1,2 @@
-node_modules/*
-!node_modules/bootstrap
-!node_modules/bootstrap-social
-!node_modules/jqvmap
-!node_modules/summernote
-!node_modules/owl.carousel
-!node_modules/ionicons201
-!node_modules/chocolat
-!node_modules/jquery-sparkline
-!node_modules/chart.js
-!node_modules/sweetalert
+node_modules/
 !.gitignore
