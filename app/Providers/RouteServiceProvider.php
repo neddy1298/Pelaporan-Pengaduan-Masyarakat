@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use Carbon\Carbon;
 
 class RouteServiceProvider extends ServiceProvider
 {

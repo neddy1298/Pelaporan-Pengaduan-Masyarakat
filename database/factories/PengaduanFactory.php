@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Pengaduan;
 use App\Models\Masyarakat;
+use App\Models\Pengaduan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

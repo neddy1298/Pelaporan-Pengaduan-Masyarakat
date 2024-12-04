@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\AuthMasyarakat;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Masyarakat;
 use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
@@ -47,9 +46,8 @@ class RegisterController extends Controller
         return view('masyarakat.auth.register');
     }
 
-
-     public function register(Request $request)
-     {
+    public function register(Request $request)
+    {
         // $this->Validat::make($request, [
         //     'nama' => ['required', 'string', 'max:255'],
         //     'email' => ['required', 'string', 'email', 'max:255', 'unique:masyarakats'],
@@ -61,18 +59,18 @@ class RegisterController extends Controller
         // Validate the form data
 
         $this->validate($request, [
-            'nama'   => 'required|unique:masyarakats,nama',
-            'email'   => 'required|email|unique:masyarakats,email',
-            'telp'   => 'required|min:8|max:13',
-            'username'   => 'required',
+            'nama' => 'required|unique:masyarakats,nama',
+            'email' => 'required|email|unique:masyarakats,email',
+            'telp' => 'required|min:8|max:13',
+            'username' => 'required',
             'password' => 'required|min:6',
             'nik' => 'required|unique:masyarakats,nik',
         ]);
         $request->validate([
-            'nama'   => 'required|unique:masyarakats,nama',
-            'email'   => 'required|email|unique:masyarakats,email',
-            'telp'   => 'required',
-            'username'   => 'required',
+            'nama' => 'required|unique:masyarakats,nama',
+            'email' => 'required|email|unique:masyarakats,email',
+            'telp' => 'required',
+            'username' => 'required',
             'password' => 'required|min:6',
             'nik' => 'required|unique:masyarakats,nik',
         ]);
@@ -90,8 +88,8 @@ class RegisterController extends Controller
         ]);
         Alert::success('Success!', 'Registrasi berhasil');
 
-
         Auth::login($user);
+
         return redirect('/#pengaduan');
 
     }

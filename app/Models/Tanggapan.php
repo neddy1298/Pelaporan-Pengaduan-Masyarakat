@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Tanggapan extends Model
 {
     use HasFactory;
 
     protected $foreignKey = 'id_petugas';
+
     protected $dates = ['tgl_tanggapan'];
+
     protected $fillable = [
         'id_pengaduan', 'tgl_tanggapan', 'tanggapan', 'id_petugas',
     ];

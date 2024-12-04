@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Masyarakat;
 
-use Illuminate\Http\Request;
 use App\Models\Masyarakat;
 use Hash;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+
 class ProfileController extends Controller
 {
     public function __construct()
@@ -21,18 +22,16 @@ class ProfileController extends Controller
     public function update(Request $request, $nik)
     {
         $user = Masyarakat::where('nik', $nik)->get()->first();
-        if($request->password)
-        {
+        if ($request->password) {
             $user->update([
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
-                ]);
-        }else
-        {
+            ]);
+        } else {
             $user->update($request->all());
         }
         Alert::success('Success!', 'Berhasil mengubah data');
+
         return redirect()->back();
     }
-
 }

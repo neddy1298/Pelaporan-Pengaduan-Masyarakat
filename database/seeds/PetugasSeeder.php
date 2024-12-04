@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Database\Factories\PetugasFactory;
 
 class PetugasSeeder extends Seeder
 {

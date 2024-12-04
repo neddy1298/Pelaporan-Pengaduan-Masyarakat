@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 // Auth::routes();
 
 // Auth
-Route::get('/login','AuthMasyarakat\LoginController@showLoginForm')->name('masyarakat.login');
+Route::get('/login', 'AuthMasyarakat\LoginController@showLoginForm')->name('masyarakat.login');
 Route::post('/login', 'AuthMasyarakat\LoginController@login')->name('masyarakat.login.submit');
 Route::get('/logout', 'AuthMasyarakat\LoginController@logoutMasyarakat')->name('masyarakat.logout');
 Route::get('/register', 'AuthMasyarakat\RegisterController@showRegisterForm')->name('masyarakat.register');
@@ -25,7 +25,6 @@ Route::get('/password/reset', 'AuthMasyarakat\ForgotPasswordController@showLinkR
 Route::post('/password/email', 'AuthMasyarakat\ForgotPasswordController@sendResetLinkEmail')->name('masyarakat.password.email');
 Route::get('/password/reset/{token}', 'AuthMasyarakat\ResetPasswordController@showResetForm')->name('masyarakat.password.reset');
 Route::post('/password/reset', 'AuthMasyarakat\ResetPasswordController@reset');
-
 
 Route::get('/', 'Masyarakat\HomeController@index')->name('masyarakat.dashboard');
 
@@ -42,12 +41,11 @@ Route::group(['prefix' => 'pengaduan'], function () {
 
 });
 
-
 // Admin
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->group(function () {
     // Auth
     Route::get('/', 'Petugas\HomeController@index')->name('petugas.dashboard');
-    Route::get('/login','AuthPetugas\LoginController@showLoginForm')->name('petugas.login');
+    Route::get('/login', 'AuthPetugas\LoginController@showLoginForm')->name('petugas.login');
     Route::post('/login', 'AuthPetugas\LoginController@login')->name('petugas.login.submit');
     Route::get('logout/', 'AuthPetugas\LoginController@logoutPetugas')->name('petugas.logout');
     Route::get('/password/reset', 'AuthPetugas\ForgotPasswordController@showLinkRequestForm')->name('petugas.password.request');
@@ -97,5 +95,4 @@ Route::prefix('admin')->group(function() {
         Route::get('/', 'Petugas\PetugasController@profile')->name('petugas.profile');
         Route::post('/update/{id}', 'Petugas\PetugasController@update')->name('petugas.update');
     });
-}) ;
-
+});

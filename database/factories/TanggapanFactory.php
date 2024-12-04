@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Tanggapan;
 use App\Models\Pengaduan;
 use App\Models\Petugas;
+use App\Models\Tanggapan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

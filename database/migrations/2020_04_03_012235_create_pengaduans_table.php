@@ -20,7 +20,7 @@ class CreatePengaduansTable extends Migration
             $table->text('judul');
             $table->text('isi_laporan');
             $table->string('foto');
-            $table->enum('status', ['0','proses','selesai']);
+            $table->enum('status', ['0', 'proses', 'selesai']);
             $table->timestamps();
 
             $table->foreign('nik')->references('nik')->on('masyarakats')->onDelete('cascade');
