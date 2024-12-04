@@ -11,5 +11,6 @@ class PengaduanSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Pengaduan::class, 170)->create();    }
+        \App\Models\Pengaduan::factory()->count(170)->create();
+    }
 }

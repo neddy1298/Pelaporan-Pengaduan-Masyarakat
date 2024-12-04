@@ -1,19 +1,39 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Pengaduan;
 use App\Models\Masyarakat;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Pengaduan::class, function (Faker $faker) {
-    $masyarakat = Masyarakat::pluck('nik')->toArray();
-    return [
-        'tgl_pengaduan' => $faker->dateTimeThisDecade($max = 'now', $timezone = 'Asia/Jakarta'),
-        'nik' => $faker->randomElement($masyarakat),
-        'judul' => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'isi_laporan' => $faker->realText($maxNbChars = 200, $indexSize = 2),
-        'foto' => 'default.jpg',
-        'status' => $faker->randomElement(['0', 'proses', 'selesai']),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pengaduan>
+ */
+class PengaduanFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Pengaduan::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'tgl_pengaduan' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'nik' => function () {
+                return Masyarakat::inRandomOrder()->first()->nik;
+            },
+            'judul' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+            'isi_laporan' => $this->faker->paragraph,
+            'foto' => 'default.jpg',
+            'status' => $this->faker->randomElement(['0', 'proses', 'selesai']),
+        ];
+    }
+}

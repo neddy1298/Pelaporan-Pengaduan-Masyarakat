@@ -1,17 +1,36 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Petugas;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Petugas::class, function (Faker $faker) {
-    return [
-        'nama_petugas' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'username' => $faker->username,
-        'password' => $faker->password,
-        'telp' => $faker->numerify('08##########'),
-        'level' => $faker->randomElement(['admin', 'petugas']),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Petugas>
+ */
+class PetugasFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Petugas::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'nama_petugas' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'username' => $this->faker->userName,
+            'password' => bcrypt('password'), // Using a fixed password for testing
+            'telp' => $this->faker->numerify('08##########'),
+            'level' => $this->faker->randomElement(['admin', 'petugas']),
+        ];
+    }
+}

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MasyarakatSeeder extends Seeder
 {
@@ -12,16 +13,16 @@ class MasyarakatSeeder extends Seeder
     public function run()
     {
         $masyarakat = [
-            'nik' => 'IND01',
-            'nama' => 'neddy M',
-            'email' => 'masyarakat@gmail.com',
+            'nik' => '1376012310010005',
+            'nama' => 'Neddy',
+            'email' => 'neddy@gmail.com',
             'username' => 'neddy',
-            'password' => bcrypt('admin1298'),
+            'password' => bcrypt('neddy1298'),
             'telp' => '082125241014',
             'active' => 0,
         ];
         DB::table('masyarakats')->insert($masyarakat);
 
-        factory(\App\Models\Masyarakat::class, 50)->create();
+        \App\Models\Masyarakat::factory()->count(50)->create();
     }
 }

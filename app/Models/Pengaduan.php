@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pengaduan extends Model
 {
+    use HasFactory;
+
+    protected $primaryKey = 'id_pengaduan';
     protected $foreignKey = 'nik';
     protected $dates = ['tgl_pengaduan'];
     protected $fillable = [

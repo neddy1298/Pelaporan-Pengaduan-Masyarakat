@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Database\Factories\PetugasFactory;
 
 class PetugasSeeder extends Seeder
 {
@@ -42,7 +44,6 @@ class PetugasSeeder extends Seeder
         DB::table('petugas')->insert($petugas);
         DB::table('petugas')->insert($neddy);
 
-
-        factory(\App\Models\Petugas::class, 10)->create();
+        \App\Models\Petugas::factory()->count(10)->create();
     }
 }

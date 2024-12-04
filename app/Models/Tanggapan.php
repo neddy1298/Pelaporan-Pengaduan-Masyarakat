@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tanggapan extends Model
 {
+    use HasFactory;
+
     protected $foreignKey = 'id_petugas';
     protected $dates = ['tgl_tanggapan'];
     protected $fillable = [

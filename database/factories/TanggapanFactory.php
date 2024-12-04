@@ -1,19 +1,40 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Models\Tanggapan;
 use App\Models\Pengaduan;
 use App\Models\Petugas;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Tanggapan::class, function (Faker $faker) {
-    $pengaduan = Pengaduan::pluck('id_pengaduan')->toArray();
-    $petugas = Petugas::pluck('id_petugas')->toArray();
-    return [
-        'id_pengaduan' => $faker->randomElement($pengaduan),
-        'tgl_tanggapan' => $faker->dateTimeThisDecade($max = 'now', $timezone = null),
-        'tanggapan' => $faker->realText($maxNbChars = 200, $indexSize = 2),
-        'id_petugas' => $faker->randomElement($petugas),
-    ];
-});
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tanggapan>
+ */
+class TanggapanFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Tanggapan::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'id_pengaduan' => function () {
+                return Pengaduan::inRandomOrder()->first()->id_pengaduan;
+            },
+            'tgl_tanggapan' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'tanggapan' => $this->faker->paragraph,
+            'id_petugas' => function () {
+                return Petugas::inRandomOrder()->first()->id_petugas;
+            },
+        ];
+    }
+}

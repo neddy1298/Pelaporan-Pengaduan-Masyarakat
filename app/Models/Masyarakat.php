@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\MasyarakatResetPasswordNotification;
 
 class Masyarakat extends Authenticatable
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     protected $guard = 'masyarakat';
 
